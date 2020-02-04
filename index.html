@@ -109,18 +109,23 @@
 
       
       <p>系统配置: CentOS 7 x86_64 cpu-only<br>普通用户: user  </p>
-<h2 id="Ananconda-环境配置"><a href="#Ananconda-环境配置" class="headerlink" title="Ananconda 环境配置"></a>Ananconda 环境配置</h2><p> 安装miniconda<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line">source ~/.bashrc</span><br><span class="line">conda list</span><br></pre></td></tr></table></figure></p>
-<p>确定将conda加入环境变量<br>source以使当前环境变量生效<br>如conda list运行正常 则成功安装  </p>
-<h3 id="更改conda源及pip源"><a href="#更改conda源及pip源" class="headerlink" title="更改conda源及pip源"></a>更改conda源及pip源</h3><h4 id="修改conda源"><a href="#修改conda源" class="headerlink" title="修改conda源"></a>修改conda源</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/  </span><br><span class="line">conda config --set show_channel_urls yes </span><br><span class="line">vim ~/.condarc</span><br></pre></td></tr></table></figure>
+<h2 id="Ananconda-环境配置"><a href="#Ananconda-环境配置" class="headerlink" title="Ananconda 环境配置"></a>Ananconda 环境配置</h2><ul>
+<li>1 安装miniconda<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
 
-<p>删除 –defaults所在行<br>之后使用命令 <em>conda info</em><br>查看url所在行是否对应清华镜像  </p>
-<h4 id="修改pip源"><a href="#修改pip源" class="headerlink" title="修改pip源"></a>修改pip源</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install --upgrade pip</span><br><span class="line">pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>确定将conda加入环境变量  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br><span class="line">conda list</span><br><span class="line">```  </span><br><span class="line">如conda list运行正常 则成功安装  </span><br><span class="line"></span><br><span class="line">- 2 修改镜像源  </span><br><span class="line"></span><br><span class="line">``` shell</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/  </span><br><span class="line">conda config --set show_channel_urls yes </span><br><span class="line">vim ~/.condarc</span><br></pre></td></tr></table></figure>
+<p>删除 –defaults所在行  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">conda info</span><br><span class="line">```  </span><br><span class="line">查看url所在行是否对应清华镜像  </span><br><span class="line"></span><br><span class="line">修改pip源  </span><br><span class="line">``` shell</span><br><span class="line">pip install --upgrade pip</span><br><span class="line">pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
 
-<p>升级pip源之后可用命令修改pip镜像源</p>
-<h3 id="conda虚拟环境配置"><a href="#conda虚拟环境配置" class="headerlink" title="conda虚拟环境配置"></a>conda虚拟环境配置</h3><h4 id="创建虚拟环境"><a href="#创建虚拟环境" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda create -n my_bert python=3.6</span><br><span class="line">conda activate my_bert</span><br></pre></td></tr></table></figure>
+<ul>
+<li>3 创建虚拟环境  </li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda create -n my_bert python=3.6</span><br><span class="line">conda activate my_bert</span><br></pre></td></tr></table></figure>
 
-<p>指定环境中python为3.6版本 避免与tensorflow pytorch所需python版本不同</p>
-<h4 id="退出虚拟环境"><a href="#退出虚拟环境" class="headerlink" title="退出虚拟环境"></a>退出虚拟环境</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda deactivate</span><br></pre></td></tr></table></figure>
+<p>退出虚拟环境  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda deactivate</span><br></pre></td></tr></table></figure>
 
 <h2 id="在虚拟环境中安装bert所需环境"><a href="#在虚拟环境中安装bert所需环境" class="headerlink" title="在虚拟环境中安装bert所需环境"></a>在虚拟环境中安装bert所需环境</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">conda install pytorch torchvision cpuonly -c pytorch  </span><br><span class="line">pip install transformers</span><br><span class="line">pip install tensorflow==1.5.0</span><br><span class="line">pip install --upgrade torch torchvision</span><br><span class="line">pip install jupyter==1.0.0 matplotlib==2.2.2 pandas==0.23.4</span><br></pre></td></tr></table></figure>
 
