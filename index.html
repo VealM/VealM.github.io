@@ -115,16 +115,19 @@
 </li>
 </ul>
 <p>确定将conda加入环境变量  </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br><span class="line">conda list</span><br><span class="line">```  </span><br><span class="line">source以使当前环境变量生效  </span><br><span class="line"></span><br><span class="line">如conda list运行正常 则成功安装  </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 更改conda源及pip源 ##</span></span></span><br><span class="line"></span><br><span class="line">- 2 修改镜像源  </span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/  </span><br><span class="line">conda config --set show_channel_urls yes </span><br><span class="line">vim ~/.condarc</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br><span class="line">conda list</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">source以使当前环境变量生效  </span><br><span class="line"></span><br><span class="line">如conda list运行正常 则成功安装  </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 更改conda源及pip源 ##</span></span></span><br><span class="line"></span><br><span class="line">- 2 修改镜像源  </span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/  </span><br><span class="line">conda config --set show_channel_urls yes </span><br><span class="line">vim ~/.condarc</span><br></pre></td></tr></table></figure>
+
 <p>删除 –defaults所在行  </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">conda info</span><br><span class="line">```  </span><br><span class="line">查看url所在行是否对应清华镜像  </span><br><span class="line"></span><br><span class="line">修改pip源  </span><br><span class="line">```shell</span><br><span class="line">pip install --upgrade pip</span><br><span class="line">pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">conda info</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">查看url所在行是否对应清华镜像  </span><br><span class="line"></span><br><span class="line">修改pip源  </span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line">pip install --upgrade pip</span><br><span class="line">pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
+
 <p>升级pip源之后可用命令修改pip镜像源</p>
 <h2 id="conda虚拟环境配置"><a href="#conda虚拟环境配置" class="headerlink" title="conda虚拟环境配置"></a>conda虚拟环境配置</h2><ul>
 <li>3 创建虚拟环境  </li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda create -n my_bert python=3.6</span><br><span class="line">conda activate my_bert</span><br></pre></td></tr></table></figure>
+
 <p>指定环境中python为3.6版本 避免与tensorflow pytorch所需python版本不同</p>
-<p>退出虚拟环境  </p>
+<p>退出虚拟环境 </p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda deactivate</span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -138,6 +141,7 @@
 </ul>
 <p>本地客户端</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh user@ip -L 8008:localhost:8888</span><br></pre></td></tr></table></figure>
+
 <p>请务必输入 -L 8008:localhost:8888<br>该命令表示端口映射 将服务器的8888端口映射到本客户机的8008端口<br>如果不做端口映射 即使ssh成功也无法打开服务器的jupyter notebook  </p>
 <p>远程服务器</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">jupyter notebook</span><br></pre></td></tr></table></figure>
