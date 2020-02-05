@@ -101,6 +101,8 @@
       <p>今天是 2020年2月2日 一苇 22岁生日快乐！  </p>
 <p>我还记得我们初遇的盛夏，你穿着裙子笑起来温婉可人。采购东西回宿舍的路上，主动伸出手帮我，当时我在心里感慨：这个女孩子好善解人意呀~后来我慢慢意识到，有些人骨子里的善良与教养总会体现在不经意处。  </p>
 <p>于我而言，独自穿行是生命的常态，时常被外界贴上无趣清高的标签也无谓。感谢你愿意走进我，我们在新年音乐会疯狂，在兰州夜色无问西东，在积石堂共赏斜阳。</p>
+<a id="more"></a>
+
 <h2 id="一起看过的电影"><a href="#一起看过的电影" class="headerlink" title="一起看过的电影"></a>一起看过的电影</h2><p><img src="https://lh5.googleusercontent.com/proxy/JOmcMPI6fdHGWEvFmTPOM1AzUXHTHh0gHL8mtiDuXCbwxUSt5qGDWhVWkPQfgcCAFsY0rIidowNbXDqTwws" alt="avatar">  </p>
 <p>2018年初冬，我们一起去看了《无问西东》。所有角色里，你最喜欢吴岭澜，集文人气质与浪漫于一身。我依稀记得电影里关于真实的探讨：  </p>
 <p><em>人把自己置身于忙碌当中，有一种麻木的踏实，但丧失了真实，你的青春也不过只有这些日子。</em>  </p>
@@ -162,8 +164,8 @@
         el: '#vcomments',
         notify: false,
         verify: '',
-        app_id: '',
-        app_key: '',
+        app_id: '854ziDXtPQxK8dJf2vsosmzN-gzGzoHsz',
+        app_key: 'kV9lcyv3dVA2I6pqA4yd23p6',
         path: window.location.pathname,
         avatar: 'mp',
         placeholder: '给我的文章加点评论吧~',
@@ -386,7 +388,7 @@
 
 <script>
   var ayerConfig = {
-    mathjax: false
+    mathjax: true
   }
 </script>
 
@@ -506,6 +508,25 @@
 </script>
 
 
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 <script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>

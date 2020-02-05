@@ -108,6 +108,8 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br><span class="line">conda list</span><br></pre></td></tr></table></figure>
 
 <p>如conda list运行正常 则成功安装  </p>
+<a id="more"></a>
+
 <h3 id="修改镜像源"><a href="#修改镜像源" class="headerlink" title="修改镜像源"></a>修改镜像源</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/  </span><br><span class="line">conda config --set show_channel_urls yes </span><br><span class="line">vim ~/.condarc</span><br></pre></td></tr></table></figure>
 
 <p>删除 –defaults所在行  </p>
@@ -183,8 +185,8 @@
         el: '#vcomments',
         notify: false,
         verify: '',
-        app_id: '',
-        app_key: '',
+        app_id: '854ziDXtPQxK8dJf2vsosmzN-gzGzoHsz',
+        app_key: 'kV9lcyv3dVA2I6pqA4yd23p6',
         path: window.location.pathname,
         avatar: 'mp',
         placeholder: '给我的文章加点评论吧~',
@@ -407,7 +409,7 @@
 
 <script>
   var ayerConfig = {
-    mathjax: false
+    mathjax: true
   }
 </script>
 
@@ -527,6 +529,25 @@
 </script>
 
 
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 <script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>

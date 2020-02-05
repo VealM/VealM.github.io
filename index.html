@@ -118,38 +118,9 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br><span class="line">conda list</span><br></pre></td></tr></table></figure>
 
 <p>如conda list运行正常 则成功安装  </p>
-<h3 id="修改镜像源"><a href="#修改镜像源" class="headerlink" title="修改镜像源"></a>修改镜像源</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/  </span><br><span class="line">conda config --set show_channel_urls yes </span><br><span class="line">vim ~/.condarc</span><br></pre></td></tr></table></figure>
-
-<p>删除 –defaults所在行  </p>
-<p>查看url所在行是否对应清华镜像</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda info</span><br></pre></td></tr></table></figure>
-
-<h3 id="修改pip源"><a href="#修改pip源" class="headerlink" title="修改pip源"></a>修改pip源</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install --upgrade pip</span><br><span class="line">pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>3 创建虚拟环境  </li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda create -n my_bert python=3.6</span><br><span class="line">conda activate my_bert</span><br></pre></td></tr></table></figure>
-
-<p>退出虚拟环境  </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda deactivate</span><br></pre></td></tr></table></figure>
-
-<h2 id="在虚拟环境中安装bert所需环境"><a href="#在虚拟环境中安装bert所需环境" class="headerlink" title="在虚拟环境中安装bert所需环境"></a>在虚拟环境中安装bert所需环境</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">conda install pytorch torchvision cpuonly -c pytorch  </span><br><span class="line">pip install transformers</span><br><span class="line">pip install tensorflow==1.5.0</span><br><span class="line">pip install --upgrade torch torchvision</span><br><span class="line">pip install jupyter==1.0.0 matplotlib==2.2.2 pandas==0.23.4</span><br></pre></td></tr></table></figure>
-
-<p>按照官网安装pytorch(命令1)后 指定tensorflow(命令3)后<br>出现core dumped的情况  经搜索 需要升级torch版本<br>因此输入命令4  </p>
-<h3 id="服务器端notebook用本地浏览器打开"><a href="#服务器端notebook用本地浏览器打开" class="headerlink" title="服务器端notebook用本地浏览器打开"></a>服务器端notebook用本地浏览器打开</h3><p>使用jupyter notebook    </p>
-<h4 id="本地客户端"><a href="#本地客户端" class="headerlink" title="本地客户端"></a>本地客户端</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh user@ip -L 8008:localhost:8888</span><br></pre></td></tr></table></figure>
-
-<p>请务必输入 -L 8008:localhost:8888<br>该命令表示端口映射 将服务器的8888端口映射到本客户机的8008端口<br>如果不做端口映射 即使ssh成功也无法打开服务器的jupyter notebook  </p>
-<h4 id="远程服务器"><a href="#远程服务器" class="headerlink" title="远程服务器"></a>远程服务器</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">jupyter notebook</span><br></pre></td></tr></table></figure>
-
-<p>在本地打开 <a href="http://localhost:8008/" target="_blank" rel="noopener">http://localhost:8008/</a><br>填入对应token</p>
-<h2 id="配置BERT环境"><a href="#配置BERT环境" class="headerlink" title="配置BERT环境"></a>配置BERT环境</h2><ul>
-<li>6 获取git仓库地址  </li>
-</ul>
-<pre><code class="shell">git clone https://gitee.com/VealM/jalammar.github.io.git</code></pre>
-<p>对应notebooks/bert中有个不错的入门体验教程<br><a href="https://gitee.com/VealM/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb" target="_blank" rel="noopener">A_Visual_Notebook_to_Using_BERT_for_the_first_time.ipynb</a><br>强烈推荐运行在jupyter notebook上体验  </p>
-
+      
+      <a class="article-more-link" href="/2020/02/04/envset-1/">阅读更多...</a>
+      
       
       <!-- 打赏 -->
       
@@ -219,20 +190,9 @@
       <p>今天是 2020年2月2日 一苇 22岁生日快乐！  </p>
 <p>我还记得我们初遇的盛夏，你穿着裙子笑起来温婉可人。采购东西回宿舍的路上，主动伸出手帮我，当时我在心里感慨：这个女孩子好善解人意呀~后来我慢慢意识到，有些人骨子里的善良与教养总会体现在不经意处。  </p>
 <p>于我而言，独自穿行是生命的常态，时常被外界贴上无趣清高的标签也无谓。感谢你愿意走进我，我们在新年音乐会疯狂，在兰州夜色无问西东，在积石堂共赏斜阳。</p>
-<h2 id="一起看过的电影"><a href="#一起看过的电影" class="headerlink" title="一起看过的电影"></a>一起看过的电影</h2><p><img src="https://lh5.googleusercontent.com/proxy/JOmcMPI6fdHGWEvFmTPOM1AzUXHTHh0gHL8mtiDuXCbwxUSt5qGDWhVWkPQfgcCAFsY0rIidowNbXDqTwws" alt="avatar">  </p>
-<p>2018年初冬，我们一起去看了《无问西东》。所有角色里，你最喜欢吴岭澜，集文人气质与浪漫于一身。我依稀记得电影里关于真实的探讨：  </p>
-<p><em>人把自己置身于忙碌当中，有一种麻木的踏实，但丧失了真实，你的青春也不过只有这些日子。</em>  </p>
-<p><em>什么是真实？</em> </p>
-<p><em>你看到什么，听到什么，做什么，和谁在一起，有一种，从心灵深处，满溢出来的不懊悔，也不羞耻的平和与喜悦。</em>  </p>
-<p>一苇，愿你早已找到属于自己的真实。</p>
-<h2 id="一起疯狂的新年音乐会"><a href="#一起疯狂的新年音乐会" class="headerlink" title="一起疯狂的新年音乐会"></a>一起疯狂的新年音乐会</h2><p>记得大二那年，我们背着复习资料去甘肃大剧院听维也纳新年音乐会。<br>曲终人散时，我们被交响乐的美妙深深震撼。<br>返程时坐公交高德忘了让我俩下车，我们一路坐到小西湖。靠着好心人的零钱，在新年钟声敲响前赶回宿舍，在公交车上快乐地祝福彼此新年快乐。  </p>
-<p>这或许是孤独如我，大学以来最印象深刻 最有仪式感 最快乐的新年。<br>感谢有你的陪伴。希望多年后我们想起2018新年，热泪盈眶。</p>
-<p><img src="https://www.event51.com/image/image/show-event-picture?fileName=2018-06-25_09-25-17__Qttqwul_ae68sGeIeD04yu747qw62gqt.jpg" alt="avatar">  </p>
-<h2 id="一起喝过的咖啡"><a href="#一起喝过的咖啡" class="headerlink" title="一起喝过的咖啡"></a>一起喝过的咖啡</h2><p>一苇君超爱喝咖啡的~虽然我喝咖啡常常会胃疼。今年九月初我们穿越大街小巷寻找安静的咖啡厅(别想在咖啡厅自习，放弃吧！少年！)，肥宅如我也算因此见识了兰大附近大大小小的茶饮店/咖啡馆。  </p>
-<p>亲爱的一苇，希望未来会有一如你沉静美好的少年，陪伴在你身边，静静看你喝咖啡的模样。  </p>
-<p><img src="https://cw1.tw/CH/images/channel_master/34108ffc-dd36-4904-a8f5-2d1eb0570774.jpg" alt="avatar">  </p>
-<p>亲爱的一苇，2020年2月2日，22岁，生日快乐！我会一直在你身后，支持你坚定的选择，期待着你的光明未来。</p>
-
+      
+      <a class="article-more-link" href="/2020/02/02/blog/">阅读更多...</a>
+      
       
       <!-- 打赏 -->
       
@@ -418,7 +378,7 @@
 
 <script>
   var ayerConfig = {
-    mathjax: false
+    mathjax: true
   }
 </script>
 
@@ -538,6 +498,25 @@
 </script>
 
 
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 <script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
