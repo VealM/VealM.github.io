@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-     Veal&#39;s Blog
+    探究pytorch中的backward函数 |  Veal&#39;s Blog
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -30,54 +30,17 @@
 <body>
   <div id="app">
     <main class="content">
-      
-<section class="cover">
-    
-      
-      <a class="forkMe" href="https://github.com/VealM/VealM.github.io"
-        target="_blank"><img width="149" height="149" src="/images/forkme.png"
-          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
-    
-  <div class="cover-frame">
-    <div class="bg-box">
-      <img src="/images/cover4.jpg" alt="image frame" />
-    </div>
-    <div class="cover-inner text-center text-white">
-      <h1><a href="/">Veal&#39;s Blog</a></h1>
-      <div id="subtitle-box">
-        
-        <span id="subtitle"></span>
-        
-      </div>
-      <div>
-        
-      </div>
-    </div>
-  </div>
-  <div class="cover-learn-more">
-    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
-  </div>
-</section>
-
-<div id="main">
-  <section class="outer">
-  <article class="articles">
-    
-    
-    
-    
-    <article id="post-backward" class="article article-type-post" itemscope
+      <section class="outer">
+  <article id="post-backward" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
     
     <header class="article-header">
        
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/02/05/backward/"
-    >探究pytorch中的backward函数</a
-  >
-</h2>
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  探究pytorch中的backward函数
+</h1>
   
 
     </header>
@@ -95,9 +58,34 @@
 
       
       
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">739字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">3分钟</span>
+        </span>
+    </span>
+</div>
+
       
     </div>
     
+
+    
+    
+
+
+
 
     
 
@@ -110,9 +98,34 @@
       
       <p>众所周知 在深度机器学习/机器学习任务中需要对损失函数求梯度<br>一般地 $loss(\overrightarrow{x})$为数量函数<br>则我们知道dim($\frac{\partial l}{\partial x}$)=dim($x$)<br>因此常见代码如下 </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x=torch.randn(<span class="number">3</span>,<span class="number">3</span>,requires_grad=<span class="literal">True</span>)</span><br><span class="line">l=(x*x).sum()</span><br><span class="line">l.backward()</span><br><span class="line">print(x.grad)</span><br></pre></td></tr></table></figure>
-      
-      <a class="article-more-link" href="/2020/02/05/backward/">阅读更多...</a>
-      
+
+<a id="more"></a>
+
+<p>结果如下</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tensor([[ 1.9426, -1.4168, -1.6959],</span><br><span class="line"><span class="code">        [-0.8824,  2.9217, -1.0793],</span></span><br><span class="line"><span class="code">        [ 3.1101, -1.6061, -2.9198]])</span></span><br></pre></td></tr></table></figure>
+<p>与我们预期结果一致  </p>
+<p>那么 如果我们考虑一般的多元向量函数<br> $\vec{y}=f(\vec{x})$,<br>则 $\vec{y}$ 对 $\vec{x}$ 的梯度则为Jacobian 矩阵:</p>
+<p>$$<br>J=\left(\begin{array}{ccc}<br>   \frac{\partial y_{1}}{\partial x_{1}} &amp; \cdots &amp; \frac{\partial y_{1}}{\partial x_{n}}\<br>   \vdots &amp; \ddots &amp; \vdots\<br>   \frac{\partial y_{m}}{\partial x_{1}} &amp; \cdots &amp; \frac{\partial y_{m}}{\partial x_{n}}<br>   \end{array}\right)<br>$$</p>
+<p>此时 我们考虑一个数量函数$l=g(\overrightarrow y)$ 则$l$对$\overrightarrow y$的梯度为$v$<br>$v=\left(\begin{array}{ccc}\frac{\partial l}{\partial y_{1}} &amp; \cdots &amp; \frac{\partial l}{\partial y_{m}}\end{array}\right)^{T}$</p>
+<p>其实 pytorch的backward()为我们所做的即为计算$J^{T} \cdot v$<br>在$l$是数量函数的前提下 $J^{T} \cdot v$满足如下性质</p>
+<p>$$<br>J^{T} \cdot v=\left(\begin{array}{ccc}<br>   \frac{\partial y_{1}}{\partial x_{1}} &amp; \cdots &amp; \frac{\partial y_{m}}{\partial x_{1}}\<br>   \vdots &amp; \ddots &amp; \vdots\<br>   \frac{\partial y_{1}}{\partial x_{n}} &amp; \cdots &amp; \frac{\partial y_{m}}{\partial x_{n}}<br>   \end{array}\right)\left(\begin{array}{c}<br>   \frac{\partial l}{\partial y_{1}}\<br>   \vdots\<br>   \frac{\partial l}{\partial y_{m}}<br>   \end{array}\right)=\left(\begin{array}{c}<br>   \frac{\partial l}{\partial x_{1}}\<br>   \vdots\<br>   \frac{\partial l}{\partial x_{n}}<br>   \end{array}\right)<br>$$</p>
+<p>但pytorch并不直接支持多元向量函数$\overrightarrow y=f(\overrightarrow x)$对$\overrightarrow x$求雅可比矩阵<br>例如如下代码  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x=torch.randn(<span class="number">3</span>,<span class="number">1</span>,requires_grad=<span class="literal">True</span>)</span><br><span class="line">y=<span class="number">3</span>*x*x</span><br><span class="line">y.backward()</span><br></pre></td></tr></table></figure>
+
+<p>则会出现运行报错  </p>
+<p>RuntimeError: grad can be implicitly created only for scalar outputs</p>
+<p>事实上,pytorch引入这一机制是避免高维的张量复合运算如$\overrightarrow y=f(\overrightarrow x)$ ,$\overrightarrow z=g(\overrightarrow y)$ 求$\overrightarrow z$对 $\overrightarrow y$的梯度。不妨设$\overrightarrow y$是$m\times n$ 矩阵 $\overrightarrow z$是$s\times t$矩阵。则所求为高阶张量形如$s\times t\times m\times n$的四阶张量。随后再考虑$\overrightarrow z$对$\overrightarrow x$的梯度，似乎问题越来越复杂。因此做了grad can be implicitly created only for scalar outputs的规定。  </p>
+<p>不过 仔细观察$J^{T} \cdot v$所满足的等式 发现$v$与$y$维度相同 根据backward函数的功能 我们可以传入形状与$y$相同的向量作为函数参数 计算一个<em>类梯度</em>  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s=torch.randn(<span class="number">3</span>,<span class="number">1</span>,requires_grad=<span class="literal">True</span>)</span><br><span class="line">t=<span class="number">3</span>*s</span><br><span class="line">w=torch.ones_like(t)</span><br><span class="line">t.backward(w)</span><br><span class="line">print(s.grad)</span><br></pre></td></tr></table></figure>
+
+<p>结果为  </p>
+<pre><code class="md">tensor([[3.],
+<span class="code">        [3.],</span>
+<span class="code">        [3.]])</span></code></pre>
+<p>可知为t对s的雅可比矩阵与w的点乘。  </p>
+<p>如果我们依次传入与t同阶的单位矩阵的各列 则将结果进行拼接可得到雅可比矩阵各个元素的值  </p>
+<p>不过对于张量部分的解释我也不满意，当年学微分几何的时候就有点晕…枉为数学系学生呜呜呜</p>
+
       
       <!-- 打赏 -->
       
@@ -128,173 +141,80 @@
   </div>
 
   
-
   
-  
-  
-
-  
-
-</article>
+  <nav class="article-nav">
     
-    <article id="post-envset-1" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
     
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/02/04/envset-1/"
-    >远端jupyter及BERT环境配置</a
-  >
-</h2>
+      <a href="/2020/02/04/envset-1/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">远端jupyter及BERT环境配置</div>
+      </a>
+    
+  </nav>
+
+
   
 
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/02/04/envset-1/" class="article-date">
-  <time datetime="2020-02-04T12:26:26.000Z" itemprop="datePublished">2020-02-04</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-  </div>
-
-      
-      
-      
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
     </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <p>系统配置: CentOS 7 x86_64 cpu-only<br>普通用户: user  </p>
-<h2 id="Ananconda-环境配置"><a href="#Ananconda-环境配置" class="headerlink" title="Ananconda 环境配置"></a>Ananconda 环境配置</h2><ul>
-<li>1 安装miniconda<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>确定将conda加入环境变量  </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br><span class="line">conda list</span><br></pre></td></tr></table></figure>
-
-<p>如conda list运行正常 则成功安装  </p>
-      
-      <a class="article-more-link" href="/2020/02/04/envset-1/">阅读更多...</a>
-      
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/04/envset-1/" data-id="ck67uz56c00001ku8hq2a3mcw"
-        class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/anaconda/" rel="tag">anaconda</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jupyter-notebook/" rel="tag">jupyter notebook</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2/" rel="tag">服务部署</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-blog" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/02/02/blog/"
-    >亲爱的一苇</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/02/02/blog/" class="article-date">
-  <time datetime="2020-02-02T13:03:02.753Z" itemprop="datePublished">2020-02-02</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%97%A5%E5%B8%B8/">日常</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <p>今天是 2020年2月2日 一苇 22岁生日快乐！  </p>
-<p>我还记得我们初遇的盛夏，你穿着裙子笑起来温婉可人。采购东西回宿舍的路上，主动伸出手帮我，当时我在心里感慨：这个女孩子好善解人意呀~后来我慢慢意识到，有些人骨子里的善良与教养总会体现在不经意处。  </p>
-<p>于我而言，独自穿行是生命的常态，时常被外界贴上无趣清高的标签也无谓。感谢你愿意走进我，我们在新年音乐会疯狂，在兰州夜色无问西东，在积石堂共赏斜阳。</p>
-      
-      <a class="article-more-link" href="/2020/02/02/blog/">阅读更多...</a>
-      
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/02/blog/" data-id="ck6527r930000qgu80d2r5dsi"
-        class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B8%A9%E6%83%85/" rel="tag">温情</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-  </article>
-  
-
-  
-</section>
 </div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        notify: false,
+        verify: '',
+        app_id: '854ziDXtPQxK8dJf2vsosmzN-gzGzoHsz',
+        app_key: 'kV9lcyv3dVA2I6pqA4yd23p6',
+        path: window.location.pathname,
+        avatar: 'mp',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
 
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
       <footer class="footer">
   <div class="outer">
     <ul class="list-inline">
@@ -445,6 +365,30 @@
 </script>
 
 
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer:'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
 
 
 <script>
