@@ -104,7 +104,7 @@
 <h2 id="C函数返回二维数组"><a href="#C函数返回二维数组" class="headerlink" title="C函数返回二维数组"></a>C函数返回二维数组</h2><p>起因是朋友遇到如下语法检查不通过</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span>** <span class="title">func_me</span><span class="params">(<span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> Mat[<span class="number">3</span>][<span class="number">4</span>];</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> Mat <span class="comment">//返回类型不一致</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>从语法字面上，确实不一致。Mat的类型是const double<strong>，与函数返回值double</strong>不一致。<br>于是朋友问，改成这样对吗？语法检查通过了</p>
+<p>从语法字面上，确实不一致。Mat的类型是const double**，与函数返回值double**不一致。<br>于是朋友问，改成这样对吗？语法检查通过了</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span>** <span class="title">func_me</span><span class="params">(<span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span>** Mat;</span><br><span class="line">    ... <span class="comment">//对Mat[i][j]赋值</span></span><br><span class="line">    <span class="keyword">return</span> Mat </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>虽然几乎不写C，但考虑到C指针与数组是对内存进行操作的，因此如果没有预先进行分配，即使语法检查通过也会出现运行时的段错误(segmentation fault)。</p>
@@ -140,7 +140,7 @@
 <p><img src="https://i.loli.net/2020/03/02/wdQKabSZrehot7R.png" alt="批注 2020-03-02 225607.png"></p>
 <p>通过观察程序输出，可推断出如下结果:</p>
 <ul>
-<li>1 不同编译器和系统架构上sizeof(int<em>) == sizeof(int)不一定永远成立(虽然谭浩强当年如是告诉我成立)。参考此处输出 sizeof(int</em>)是8 sizeof(int)是4。</li>
+<li>1 不同编译器和系统架构上sizeof(int*) == sizeof(int)不一定永远成立(虽然谭浩强当年如是告诉我成立)。参考此处输出 sizeof(int*)是8 sizeof(int)是4。</li>
 <li>2 p和m类型确实不一样。p向后位移1位是1个int*的长度(比较p与(p+1))，而m位移1位是4个int的长度(比较m与m[1])。这证明了p是二重指针，是指向指针的指针；而m是指向一维数组的指针。</li>
 <li>3 p[1]有点奇怪，似乎内存地址与p完全无关了。但我猜测访问p[1][0]就会段错误。</li>
 </ul>
