@@ -99,6 +99,8 @@
 
       
       <p>看到这个标题，就知道是某个睡过大一的学渣来补C指针的坑了。<br>怕问得太多惹大佬同学烦，于是卑微大学生求助C++老师(老师:哦？现在知道学习了？)，竟得到董老师的耐心解答~<br>在平时与他人的交流讨论中，如能指个方向我都十分感激；但只有老师，关心你是否真正弄清概念，董老师甚至设计实验让我去尝试分析运行结果。<br>能成为你们的学生，真幸运。</p>
+<a id="more"></a>
+
 <h2 id="C函数返回二维数组"><a href="#C函数返回二维数组" class="headerlink" title="C函数返回二维数组"></a>C函数返回二维数组</h2><p>起因是朋友遇到如下语法检查不通过</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span>** <span class="title">func_me</span><span class="params">(<span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> Mat[<span class="number">3</span>][<span class="number">4</span>];</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> Mat <span class="comment">//返回类型不一致</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
