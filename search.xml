@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>C语言二维数组内存操纵问题</title>
+    <url>/2020/03/02/return-2d-array-in-c/</url>
+    <content><![CDATA[<p>看到这个标题，就知道是某个睡过大一的学渣来补C指针的坑了。<br>怕问得太多惹大佬同学烦，于是卑微大学生求助C++老师(老师:哦？现在知道学习了？)，竟得到董老师的耐心解答~<br>在平时与他人的交流讨论中，如能指个方向我都十分感激；但只有老师，关心你是否真正弄清概念，董老师甚至设计实验让我去尝试分析运行结果。<br>能成为你们的学生，真幸运。</p>
+<a id="more"></a>
+
+<h2 id="C函数返回二维数组"><a href="#C函数返回二维数组" class="headerlink" title="C函数返回二维数组"></a>C函数返回二维数组</h2><p>起因是朋友遇到如下语法检查不通过</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span>** <span class="title">func_me</span><span class="params">(<span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> Mat[<span class="number">3</span>][<span class="number">4</span>];</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> Mat <span class="comment">//返回类型不一致</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从语法字面上，确实不一致。Mat的类型是const double**，与函数返回值double**不一致。<br>于是朋友问，改成这样对吗？语法检查通过了</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span>** <span class="title">func_me</span><span class="params">(<span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span>** Mat;</span><br><span class="line">    ... <span class="comment">//对Mat[i][j]赋值</span></span><br><span class="line">    <span class="keyword">return</span> Mat </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>虽然几乎不写C，但考虑到C指针与数组是对内存进行操作的，因此如果没有预先进行分配，即使语法检查通过也会出现运行时的段错误(segmentation fault)。</p>
+<p>我曾经对如何让c函数返回二维数组很感兴趣，所以自己动手写了代码</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span>** <span class="title">matrix_me</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> row, <span class="keyword">const</span> <span class="keyword">int</span> col)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span>** mat = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>*)*row);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; i++)</span><br><span class="line">        mat[i] = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>)*col);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; row; k++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j&lt;col; j++)</span><br><span class="line">            mat[k][j] = k+ j;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> mat;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> row = <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> col = <span class="number">4</span>;</span><br><span class="line">    <span class="keyword">int</span> ** mat;</span><br><span class="line">    mat = matrix_me(row,col);</span><br><span class="line"></span><br><span class="line">     <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; col; j++)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d"</span>,mat[i][j]);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"\t"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; row; i++)&#123;</span><br><span class="line">            <span class="built_in">free</span>(mat[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>(mat);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在gcc 7.5.0 CentOs7平台上可以正常执行。<br>从matrix_me函数中可以看出我的内存分配思路：首先分配指向row个一维数组的二重指针。再对row个一维数组依次分配col个int内存。之后的使用方法则和使用普通二维数组一致。<br>在释放内存的时候也要小心，遵循<em>先生后灭</em>的规则。也即先释放一维数组的内存，然后释放二重指针的内存。</p>
+<p>按说故事在此该结束了，无奈我实在是个爱折腾的人，上面这个代码对于c基础一般的小白来说实在头疼，回到最初朋友的代码:  </p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span>** <span class="title">func_me</span><span class="params">(<span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> Mat[<span class="number">3</span>][<span class="number">4</span>];</span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">//return Mat //返回类型不一致</span></span><br><span class="line">    <span class="keyword">double</span>** p = (<span class="keyword">double</span> **)Mat;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果我增加以下两行呢，能否实现她的要求呢？</p>
+<h2 id="二重指针与二维数组名"><a href="#二重指针与二维数组名" class="headerlink" title="二重指针与二维数组名"></a>二重指针与二维数组名</h2><p>考虑到我返回的是二重指针，看上去p是指向Mat的指针，Mat含有3个一维数组(3个一维指针)。因此我外部函数可写成如下形式对元素进行访问:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span>** <span class="title">get_array</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> Mat[<span class="number">3</span>][<span class="number">3</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j&lt;<span class="number">3</span>; j++)</span><br><span class="line">                Mat[i][j] = i+j;<span class="comment">//printf("%d",Mat[i][j]);</span></span><br><span class="line">    <span class="keyword">int</span> **p = (<span class="keyword">int</span>**)Mat;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> **p = get_array();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> *ar = *(p+i);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j&lt;<span class="number">3</span>; j++)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d \t"</span>,*(ar+j));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);   </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但不幸的是，执行后报错<br>Segmentation fault<br>一般这种错误多是内存访问越界，但很奇怪，Mat已经在get_array中分配内存可正常访问元素，而p不过是Mat首地址，换一种方式访问相同内存，为什么还会出现这个错误呢？<br>而使用p[i][j]等价方式类也是同样的段错误。<br>此处剧透：既然访问时能想到一维数组，为什么分配时不考虑将一维指针数组的数组名作为二维数组名呢？</p>
+<h3 id="Mat的生存周期？"><a href="#Mat的生存周期？" class="headerlink" title="Mat的生存周期？"></a>Mat的生存周期？</h3><p>显然自己太菜了，于是跑去找朋友请教，于是我把需求叙述一遍<br><em>在matrix_me函数内分配二维数组a，并返回到主函数供外部访问</em><br>忽然我觉得有些不对，二维数组a的生命周期似乎在matrix_me执行结束后随之消失，因此无论如何访问都不对呀！<br>于是我做了个实验，干脆将matrix_me内的代码加入主函数内，使得Mat就在外部声明，看看这样能否得到正确结果。<br>然而结果依旧是<br>Segmentation Fault<br>看来生命周期也不能使程序正确执行，虽然它也可能导致段错误。</p>
+<p>不过可能会有疑问，之前正常运行的代码不也是函数内部声明了二维数组么，主函数还是可以使用。但那时使用malloc，如销毁则使用free，否则默认到main执行完才销毁。</p>
+<h3 id="指向数组的指针与指向指针的指针"><a href="#指向数组的指针与指向指针的指针" class="headerlink" title="指向数组的指针与指向指针的指针"></a>指向数组的指针与指向指针的指针</h3><p>标题就像绕口令？</p>
+<p>百思不得其解的我决定求助C++老师，竟然得到老师的回复：</p>
+<p><em>Mat是指向数组的指针，而p是指向指针的指针，不做强制转换赋值，编译器会提示清晰的错误信息</em></p>
+<p>由于我用gcc编译时未加-Wall参数，所以没收到错误信息。(今天也是被编译器嘲讽的一天呢)那么看来这个问题不难解决，伪代码思路如下</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> ** <span class="title">matrix_me</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> row, <span class="keyword">const</span> <span class="keyword">int</span> col)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> MAT[row][col];</span><br><span class="line">    <span class="comment">//MAT相关操作</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span>* p[row];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i &lt; row; i++)&#123;</span><br><span class="line">        p[i] = <span class="keyword">new</span> <span class="keyword">int</span>[col];</span><br><span class="line">    &#125;</span><br><span class="line">    p = MAT; <span class="comment">//同类型转换</span></span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看来两行是不够啦，加五行才行。这看起来也挺麻烦的，还不如我手动二重指针建二维数组呢。于是我向老师发出灵魂拷问：</p>
+<p><em>老师会更倾向于怎么解决返回二维数组的问题呢</em></p>
+<p><em>C中没好办法，可以在函数内部动态分配，返回二重指针。C++中将其封装为类，返回对象即可，但需实现复制构造函数，效率不高</em></p>
+<p>就在我以为这个问题真懂了，董老师发来一道思考题！</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> **p;</span><br><span class="line">    <span class="comment">//cout&lt;&lt;"p size is "&lt;&lt;sizeof(p)/sizeof(int)&lt;&lt;endl;</span></span><br><span class="line">    <span class="comment">//cout&lt;&lt;"int size is"&lt;&lt; sizeof(int)&lt;&lt;endl;</span></span><br><span class="line">    <span class="keyword">int</span> m[<span class="number">3</span>][<span class="number">4</span>]=&#123;&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">14</span>&#125;,&#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">24</span>&#125;,&#123;<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">34</span>&#125;&#125;; </span><br><span class="line">    p=(<span class="keyword">int</span> **)m; </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt;<span class="string">"m="</span>&lt;&lt;m&lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"m size is "</span>&lt;&lt; <span class="keyword">sizeof</span>(m)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"p="</span>&lt;&lt;p&lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"p size is "</span>&lt;&lt; <span class="keyword">sizeof</span>(p)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"m[1]="</span>&lt;&lt;m[<span class="number">1</span>]&lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"(p+1)="</span>&lt;&lt;(p+<span class="number">1</span>)&lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"p[1]="</span>&lt;&lt;p[<span class="number">1</span>]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"m[2]="</span>&lt;&lt;m[<span class="number">2</span>]&lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"(p+2)="</span>&lt;&lt;(p+<span class="number">2</span>)&lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"p[2]="</span>&lt;&lt;p[<span class="number">2</span>]&lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><em>解释清楚其输出，就清楚了M和p的区别</em></p>
+<p>谢天谢地，这不是当年cpp的期末考题，不然当年的78分可拿不到了…</p>
+<p>在gcc 7.5.0 CentOS-7 64bit的系统进行测试，结果如下</p>
+<p><img src="https://i.loli.net/2020/03/02/wdQKabSZrehot7R.png" alt="批注 2020-03-02 225607.png"></p>
+<p>通过观察程序输出，可推断出如下结果:</p>
+<ul>
+<li>1 不同编译器和系统架构上sizeof(int*) == sizeof(int)不一定永远成立(虽然谭浩强当年如是告诉我成立)。参考此处输出 sizeof(int*)是8 sizeof(int)是4。</li>
+<li>2 p和m类型确实不一样。p向后位移1位是1个int*的长度(比较p与(p+1))，而m位移1位是4个int的长度(比较m与m[1])。这证明了p是二重指针，是指向指针的指针；而m是指向一维数组的指针。</li>
+<li>3 p[1]有点奇怪，似乎内存地址与p完全无关了。但我猜测访问p[1][0]就会段错误。</li>
+</ul>
+<p>董老师对第三点进行补充：</p>
+<p><em>1.段错误这点没错。因为p[1]仍是一指针，指向内存第2个字节，p[1][0]即读该地址开始的一个整数，程序无权读写</em><br>2.p[1]应是将p偏后一个位置后，取若干字节内容解释成一个指针，具体值与编译器，机器体系结构有关。如果int和int*不一样大，则p[1]是一个整数的一部分，或两个整数的各一部分拼成</p>
+<p>此时我的表情只有</p>
+<p><img src="https://image.dbbqb.com/Xb0W" alt="avatar"></p>
+<h3 id="结语：如何求助？"><a href="#结语：如何求助？" class="headerlink" title="结语：如何求助？"></a>结语：如何求助？</h3><p>其实除了感谢老师，也该反思，应该如何向别人求助。<br>以下这些规则，我会用来约束自己，但从不强求别人也做到。</p>
+<ul>
+<li>1 擅于提炼问题关键词并运用万能检索术，遇到的大部分问题都会有解答。并强烈建议使用英文+谷歌。</li>
+<li>2 对于程序调试类问题，看到报错信息回到第一条。如果是逻辑错，尝试断点跟踪调试分析状态。如果依然不能解决需要他人帮忙，也不要把整个复杂工程砸过去，自行排查最有可能错误的地方，保证他人审查代码不超过100行。</li>
+<li>3 没有人有义务帮你答疑，尽全力去表达感谢。虽然也有人说“帮助是互相的”，不过大佬几乎无事麻烦我这种渣渣…</li>
+</ul>
+<p>求助的终极目的——不是糊弄过眼前的bug或项目，而是真正提高自我啊。就算真有不求回报随时秒回的圣母心大佬，那下次解决问题的勇气，就是来自于我有大佬朋友吗？难道不应该是我有能力独立解决它的信心吗？</p>
+<p>哈哈，虽然这么说，但还是希望有机会能多向大佬请教！(毕竟自学cs这条路走得真累…)</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>2d-array</tag>
+        <tag>C</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>texlive + vscode书写中文tex</title>
+    <url>/2020/02/24/tex/</url>
+    <content><![CDATA[<p>毕业季将至，每想到毕业设计截稿将至则忧心焦虑，不敢再摸鱼冲浪。因此，在vscode上装好texlive，为接下来的成果书写准备一个完美的环境吧~   </p>
+<p>网上关于这方面的教程很多，本不必重复再写，但在安装过程中遇到报错<em>vscode Recipe terminated with fatal error: spawn xelatex ENOENT</em>，如你也遇到相似问题，拉到最后尝试下我的方法~</p>
+<a id="more"></a>
+
+<h2 id="为什么需要latex？"><a href="#为什么需要latex？" class="headerlink" title="为什么需要latex？"></a>为什么需要latex？</h2><ul>
+<li>1 理工科论文书写里会涉及大量数学公式，而latex为排版界的专家，尤其擅长各种数学公式的排版。虽然word也有插入公式的功能，但拆入的符号有限，而且排版较latex差一些。  </li>
+<li>2 毕业设计通常各高校会提供模板，一般分为docx和tex版本的。科研期刊更是通常提供tex模板，保证排版美观，同时也减少投稿人在排版上费过多精力。  </li>
+</ul>
+<p>其实我平时都用markdown，插入数学公式也很方便，但对于<strong>正式学位论文或期刊投稿</strong>等，采用latex进行正规美观排版为主流。  </p>
+<p>以及在这篇blog中，我们选择texlive+vscode的组合。原因是：  </p>
+<ul>
+<li>1 texlive是latex中较为流行的发行版</li>
+<li>2 vscode是好用的编辑器。可以理解texlive为tex文件的编译器，我们还需要编辑器。(你当然可以在记事本写好tex然后命令行编译…)texlive安装会提示是否需要texworks，但据说很界面简陋。最初我使用的是texlive+texstudio的组合，但有vscode+万能插件为什么还要studio呢…</li>
+</ul>
+<h2 id="texlive-vscode基本配置"><a href="#texlive-vscode基本配置" class="headerlink" title="texlive+vscode基本配置"></a>texlive+vscode基本配置</h2><h3 id="使用texlive"><a href="#使用texlive" class="headerlink" title="使用texlive"></a>使用texlive</h3><p>虽然一直说用latex写文档，但latex具有多个发行版，如texlive, MiKTeX, CTex等。这里我们选择texlive(但后面会用到MiKTex)，安装包可从清华源获取  </p>
+<p><a href="https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/" target="_blank" rel="noopener">tuna_texlive</a> 选择texlive.iso下载即可  </p>
+<p>挂载镜像后，单击install-tl-advanced.bat进行安装。可进行<strong>安装路径修改</strong>以及在advanced选项里进行个性化设置(比如不需要前端编辑器)  </p>
+<p>点击安装，等待3000+包下载安装  </p>
+<p>1h11min后…  </p>
+<p>安装后texlive还会进行一些系统配置，结束后关闭选项可用，因此不用心急。  </p>
+<p>在cmd逐条进行测试  </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tex -v</span><br><span class="line">latex -v</span><br><span class="line">xelatex -v</span><br><span class="line">pdflatex -v</span><br></pre></td></tr></table></figure>
+
+<p>如能正确返回结果，则表明安装成功。  </p>
+<h3 id="配置vscode"><a href="#配置vscode" class="headerlink" title="配置vscode"></a>配置vscode</h3><p>此处默认已安装vscode，安装包可从此处获取。  </p>
+<p><a href="https://code.visualstudio.com/download" target="_blank" rel="noopener">vscode</a>  </p>
+<p>首先我们需要安装latex的拓展，在扩展商店中搜索<strong>LaTex Workshop</strong>进行安装。  </p>
+<p>安装完成后，打开settings.json文件写入相关配置。  </p>
+<p>注意settings.json文件，通常具有如下格式  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">item: command&#x2F;path, </span><br><span class="line"># &quot;latex-preview.command&quot;: &quot;xelatex&quot;,</span><br></pre></td></tr></table></figure>
+
+<p>对于item具有多重属性的 采用[]与{}进行分层  </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">        "name": "xelatex",</span><br><span class="line">        "tools": [</span><br><span class="line">        "xelatex"</span><br><span class="line">        ]</span><br><span class="line">        &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>对于多个item需要用 , 进行隔开否则会提示报错。  </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">item1: path1,</span><br><span class="line">item2: path2,</span><br></pre></td></tr></table></figure>
+
+<p>针对texlive在vscode的配置，我们需要在vscode中的settings.json中添加如下字段：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">"latex-workshop.latex.recipes": [</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">"name": "xelatex",</span><br><span class="line"></span><br><span class="line">"tools": [</span><br><span class="line"></span><br><span class="line">"xelatex"</span><br><span class="line"></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">"name": "xelatex -&gt; bibtex -&gt; xelatex*2",</span><br><span class="line"></span><br><span class="line">"tools": [</span><br><span class="line"></span><br><span class="line">"xelatex",</span><br><span class="line"></span><br><span class="line">"bibtex",</span><br><span class="line"></span><br><span class="line">"xelatex",</span><br><span class="line"></span><br><span class="line">"xelatex"</span><br><span class="line"></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">],</span><br><span class="line"></span><br><span class="line">"latex-workshop.latex.tools": [</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">"name": "latexmk",</span><br><span class="line"></span><br><span class="line">"command": "latexmk",</span><br><span class="line"></span><br><span class="line">"args": [</span><br><span class="line"></span><br><span class="line">"-synctex=1",</span><br><span class="line"></span><br><span class="line">"-interaction=nonstopmode",</span><br><span class="line"></span><br><span class="line">"-file-line-error",</span><br><span class="line"></span><br><span class="line">"-pdf",</span><br><span class="line"></span><br><span class="line">"%DOC%"</span><br><span class="line"></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">"name": "xelatex",</span><br><span class="line"></span><br><span class="line">"command": "xelatex",</span><br><span class="line"></span><br><span class="line">"args": [</span><br><span class="line"></span><br><span class="line">"-synctex=1",</span><br><span class="line"></span><br><span class="line">"-interaction=nonstopmode",</span><br><span class="line"></span><br><span class="line">"-file-line-error",</span><br><span class="line"></span><br><span class="line">"%DOC%"</span><br><span class="line"></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">"name": "bibtex",</span><br><span class="line"></span><br><span class="line">"command": "bibtex",</span><br><span class="line"></span><br><span class="line">"args": [</span><br><span class="line"></span><br><span class="line">"%DOCFILE%"</span><br><span class="line"></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">],</span><br><span class="line"></span><br><span class="line">"latex-preview.command": "xelatex",</span><br><span class="line">"latex-workshop.view.pdf.viewer": "tab"</span><br></pre></td></tr></table></figure>
+
+<p>完成以上基本配置，打开文件夹新建tex文件，进行文档书写吧~  </p>
+<p>提供个hello.tex  </p>
+<p>英文</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">\documentclass&#123;article&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">Hello world!</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
+
+<p>中文</p>
+<pre><code class="latex">\documentclass[UTF8]{ctexart}
+\begin{document}
+你好!
+\end{document}</code></pre>
+<p>编译方式  </p>
+<ul>
+<li>1 在tex编写界面 点击黄色所圈的√进入tex命令界面</li>
+</ul>
+<p><img src="https://i.loli.net/2020/02/24/Dfz43lVbvsLFXxk.png" alt="1.png">    </p>
+<ul>
+<li>2 界面如下 先build 后 view in vscode tab</li>
+</ul>
+<p><img src="https://i.loli.net/2020/02/24/Ki3L4QzJURXuyxs.png" alt="2.png">  </p>
+<p>build我遇到报错！  </p>
+<h3 id="terminated-with-fatal-error-spawn-xelatex-ENOENT"><a href="#terminated-with-fatal-error-spawn-xelatex-ENOENT" class="headerlink" title="terminated with fatal error: spawn xelatex ENOENT"></a>terminated with fatal error: spawn xelatex ENOENT</h3><p>十分悲伤，查看log后分析 一般该报错是由于环境变量设置错误或相关包安装不完全导致。<br>如latex -v能正确返回，则说明环境变量设置没问题，因此推测问题是相关包安装不完全导致。<br>因此，安装perl和MikTex<br>列出安装地址  </p>
+<p><a href="http://strawberryperl.com" target="_blank" rel="noopener">perl</a><br><a href="https://www.filehorse.com/download-miktex-64/" target="_blank" rel="noopener">MikTex</a>  </p>
+<p>这里不得不吐槽的是，perl的下载速度实在感人…<br>以及，MikTex的官网win installer打不开…所以第二个链接来自filehorse，下载的是basic_installer，在本机安装时会下载相关包。  </p>
+<p>如果跟我熟的话，我直接传你也行…  </p>
+<p>安装完成后，需要对MikTex进行相关设置  </p>
+<p><img src="https://i.loli.net/2020/02/24/HXbEAMmrzixLqBD.png" alt="4.png">  </p>
+<p>如果缺失包就自动安装(之前选了ask me就会一直弹窗口….)  </p>
+<p>进行以上设置后，重启vscode，再次build你的tex文件，就可以完美展现啦  </p>
+<p>英文<br><img src="https://i.loli.net/2020/02/24/TzX4OdniZCRQvMG.png" alt="3.png">  </p>
+<p>中文  </p>
+<p><img src="https://i.loli.net/2020/02/24/go7PJFYGq29zpfX.png" alt="5.png">  </p>
+<p>中文需要ctexart包，build时会被MkiTex识别到自动为你安装，还是相当方便的~  </p>
+<p>完成latex配置的我十分快乐，就好像论文已经写完了一样~  </p>
+<p>关于tex模板，可参考<a href="https://github.com/yernhi/collection-latex-templates" target="_blank" rel="noopener">github仓库</a> 中国各大高校，应用尽有~ 有时git clone速度慢，可以先fork到gitee去再clone。  </p>
+<p>很虚，可能写论文时又会遇到奇奇怪怪的bug（想拥有无bug体质啊）后期有空应该会再更？祝大家毕业论文写作一切顺利！！！  </p>
+<p>参考博客  </p>
+<p><a href="https://stackoverflow.club/install-latex-on-win10/" target="_blank" rel="noopener">https://stackoverflow.club/install-latex-on-win10/</a> </p>
+<p><a href="https://zhuanlan.zhihu.com/p/41245817" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/41245817</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>texlive</tag>
+        <tag>vscode</tag>
+        <tag>MiKTeX</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>探究pytorch中的backward函数</title>
+    <url>/2020/02/05/backward/</url>
+    <content><![CDATA[<p>众所周知 在深度机器学习/机器学习任务中需要对损失函数求梯度<br>一般地 $loss(\overrightarrow{x})$为数量函数<br>则我们知道dim($\frac{\partial l}{\partial x}$)=dim($x$)<br>因此常见代码如下 </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x=torch.randn(<span class="number">3</span>,<span class="number">3</span>,requires_grad=<span class="literal">True</span>)</span><br><span class="line">l=(x*x).sum()</span><br><span class="line">l.backward()</span><br><span class="line">print(x.grad)</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>结果如下</p>
+<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">tensor([[ 1.9426, -1.4168, -1.6959],</span><br><span class="line"><span class="code">        [-0.8824,  2.9217, -1.0793],</span></span><br><span class="line"><span class="code">        [ 3.1101, -1.6061, -2.9198]])</span></span><br></pre></td></tr></table></figure>
+<p>与我们预期结果一致  </p>
+<p>那么 如果我们考虑一般的多元向量函数<br> $\vec{y}=f(\vec{x})$,<br>则 $\vec{y}$ 对 $\vec{x}$ 的梯度则为Jacobian 矩阵:</p>
+<p>$$<br>J=\left(\begin{array}{ccc}<br>   \frac{\partial y_{1}}{\partial x_{1}} &amp; \cdots &amp; \frac{\partial y_{1}}{\partial x_{n}}\<br>   \vdots &amp; \ddots &amp; \vdots\<br>   \frac{\partial y_{m}}{\partial x_{1}} &amp; \cdots &amp; \frac{\partial y_{m}}{\partial x_{n}}<br>   \end{array}\right)<br>$$</p>
+<p>此时 我们考虑一个数量函数$l=g(\overrightarrow y)$ 则$l$对$\overrightarrow y$的梯度为$v$<br>$v=\left(\begin{array}{ccc}\frac{\partial l}{\partial y_{1}} &amp; \cdots &amp; \frac{\partial l}{\partial y_{m}}\end{array}\right)^{T}$</p>
+<p>其实 pytorch的backward()为我们所做的即为计算$J^{T} \cdot v$<br>在$l$是数量函数的前提下 $J^{T} \cdot v$满足如下性质</p>
+<p>$$<br>J^{T} \cdot v=\left(\begin{array}{ccc}<br>   \frac{\partial y_{1}}{\partial x_{1}} &amp; \cdots &amp; \frac{\partial y_{m}}{\partial x_{1}}\<br>   \vdots &amp; \ddots &amp; \vdots\<br>   \frac{\partial y_{1}}{\partial x_{n}} &amp; \cdots &amp; \frac{\partial y_{m}}{\partial x_{n}}<br>   \end{array}\right)\left(\begin{array}{c}<br>   \frac{\partial l}{\partial y_{1}}\<br>   \vdots\<br>   \frac{\partial l}{\partial y_{m}}<br>   \end{array}\right)=\left(\begin{array}{c}<br>   \frac{\partial l}{\partial x_{1}}\<br>   \vdots\<br>   \frac{\partial l}{\partial x_{n}}<br>   \end{array}\right)<br>$$</p>
+<p>但pytorch并不直接支持多元向量函数$\overrightarrow y=f(\overrightarrow x)$对$\overrightarrow x$求雅可比矩阵<br>例如如下代码  </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x=torch.randn(<span class="number">3</span>,<span class="number">1</span>,requires_grad=<span class="literal">True</span>)</span><br><span class="line">y=<span class="number">3</span>*x*x</span><br><span class="line">y.backward()</span><br></pre></td></tr></table></figure>
+
+<p>则会出现运行报错  </p>
+<p>RuntimeError: grad can be implicitly created only for scalar outputs</p>
+<p>事实上,pytorch引入这一机制是避免高维的张量复合运算如$\overrightarrow y=f(\overrightarrow x)$ ,$\overrightarrow z=g(\overrightarrow y)$ 求$\overrightarrow z$对 $\overrightarrow y$的梯度。不妨设$\overrightarrow y$是$m\times n$ 矩阵 $\overrightarrow z$是$s\times t$矩阵。则所求为高阶张量形如$s\times t\times m\times n$的四阶张量。随后再考虑$\overrightarrow z$对$\overrightarrow x$的梯度，似乎问题越来越复杂。因此做了grad can be implicitly created only for scalar outputs的规定。  </p>
+<p>不过 仔细观察$J^{T} \cdot v$所满足的等式 发现$v$与$y$维度相同 根据backward函数的功能 我们可以传入形状与$y$相同的向量作为函数参数 计算一个<em>类梯度</em>  </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s=torch.randn(<span class="number">3</span>,<span class="number">1</span>,requires_grad=<span class="literal">True</span>)</span><br><span class="line">t=<span class="number">3</span>*s</span><br><span class="line">w=torch.ones_like(t)</span><br><span class="line">t.backward(w)</span><br><span class="line">print(s.grad)</span><br></pre></td></tr></table></figure>
+
+<p>结果为  </p>
+<pre><code class="md">tensor([[3.],
+<span class="code">        [3.],</span>
+<span class="code">        [3.]])</span></code></pre>
+<p>可知为t对s的雅可比矩阵与w的点乘。  </p>
+<p>如果我们依次传入与t同阶的单位矩阵的各列 则将结果进行拼接可得到雅可比矩阵各个元素的值  </p>
+<p>不过对于张量部分的解释我也不满意，当年学微分几何的时候就有点晕…枉为数学系学生呜呜呜</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>pytorch</tag>
+        <tag>backward</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>远端jupyter及BERT环境配置</title>
+    <url>/2020/02/04/envset-1/</url>
+    <content><![CDATA[<p>系统配置: CentOS 7 x86_64 cpu-only<br>普通用户: user  </p>
+<h2 id="Ananconda-环境配置"><a href="#Ananconda-环境配置" class="headerlink" title="Ananconda 环境配置"></a>Ananconda 环境配置</h2><ul>
+<li>1 安装miniconda<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>确定将conda加入环境变量  </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source ~/.bashrc</span><br><span class="line">conda list</span><br></pre></td></tr></table></figure>
+
+<p>如conda list运行正常 则成功安装  </p>
+<a id="more"></a>
+
+<h3 id="修改镜像源"><a href="#修改镜像源" class="headerlink" title="修改镜像源"></a>修改镜像源</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/  </span><br><span class="line">conda config --set show_channel_urls yes </span><br><span class="line">vim ~/.condarc</span><br></pre></td></tr></table></figure>
+
+<p>删除 –defaults所在行  </p>
+<p>查看url所在行是否对应清华镜像</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">conda info</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改pip源"><a href="#修改pip源" class="headerlink" title="修改pip源"></a>修改pip源</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pip install --upgrade pip</span><br><span class="line">pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>3 创建虚拟环境  </li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">conda create -n my_bert python=3.6</span><br><span class="line">conda activate my_bert</span><br></pre></td></tr></table></figure>
+
+<p>退出虚拟环境  </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">conda deactivate</span><br></pre></td></tr></table></figure>
+
+<h2 id="在虚拟环境中安装bert所需环境"><a href="#在虚拟环境中安装bert所需环境" class="headerlink" title="在虚拟环境中安装bert所需环境"></a>在虚拟环境中安装bert所需环境</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">conda install pytorch torchvision cpuonly -c pytorch  </span><br><span class="line">pip install transformers</span><br><span class="line">pip install tensorflow==1.5.0</span><br><span class="line">pip install --upgrade torch torchvision</span><br><span class="line">pip install jupyter==1.0.0 matplotlib==2.2.2 pandas==0.23.4</span><br></pre></td></tr></table></figure>
+
+<p>按照官网安装pytorch(命令1)后 指定tensorflow(命令3)后<br>出现core dumped的情况  经搜索 需要升级torch版本<br>因此输入命令4  </p>
+<h3 id="服务器端notebook用本地浏览器打开"><a href="#服务器端notebook用本地浏览器打开" class="headerlink" title="服务器端notebook用本地浏览器打开"></a>服务器端notebook用本地浏览器打开</h3><p>使用jupyter notebook    </p>
+<h4 id="本地客户端"><a href="#本地客户端" class="headerlink" title="本地客户端"></a>本地客户端</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh user@ip -L 8008:localhost:8888</span><br></pre></td></tr></table></figure>
+
+<p>请务必输入 -L 8008:localhost:8888<br>该命令表示端口映射 将服务器的8888端口映射到本客户机的8008端口<br>如果不做端口映射 即使ssh成功也无法打开服务器的jupyter notebook  </p>
+<h4 id="远程服务器"><a href="#远程服务器" class="headerlink" title="远程服务器"></a>远程服务器</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd ~</span><br><span class="line">jupyter notebook</span><br></pre></td></tr></table></figure>
+
+<p>在本地打开 <a href="http://localhost:8008/" target="_blank" rel="noopener">http://localhost:8008/</a><br>填入对应token</p>
+<h2 id="配置BERT环境"><a href="#配置BERT环境" class="headerlink" title="配置BERT环境"></a>配置BERT环境</h2><ul>
+<li>6 获取git仓库地址  </li>
+</ul>
+<pre><code class="shell">git clone https://gitee.com/VealM/jalammar.github.io.git</code></pre>
+<p>对应notebooks/bert中有个不错的入门体验教程<br><a href="https://gitee.com/VealM/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb" target="_blank" rel="noopener">A_Visual_Notebook_to_Using_BERT_for_the_first_time.ipynb</a><br>强烈推荐运行在jupyter notebook上体验  </p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>anaconda</tag>
+        <tag>jupyter notebook</tag>
+        <tag>服务部署</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>亲爱的一苇</title>
+    <url>/2020/02/02/blog/</url>
+    <content><![CDATA[<p>今天是 2020年2月2日 一苇 22岁生日快乐！  </p>
+<p>我还记得我们初遇的盛夏，你穿着裙子笑起来温婉可人。采购东西回宿舍的路上，主动伸出手帮我，当时我在心里感慨：这个女孩子好善解人意呀~后来我慢慢意识到，有些人骨子里的善良与教养总会体现在不经意处。  </p>
+<p>于我而言，独自穿行是生命的常态，时常被外界贴上无趣清高的标签也无谓。感谢你愿意走进我，我们在新年音乐会疯狂，在兰州夜色无问西东，在积石堂共赏斜阳。</p>
+<a id="more"></a>
+
+<h2 id="一起看过的电影"><a href="#一起看过的电影" class="headerlink" title="一起看过的电影"></a>一起看过的电影</h2><p><img src="https://lh5.googleusercontent.com/proxy/JOmcMPI6fdHGWEvFmTPOM1AzUXHTHh0gHL8mtiDuXCbwxUSt5qGDWhVWkPQfgcCAFsY0rIidowNbXDqTwws" alt="avatar">  </p>
+<p>2018年初冬，我们一起去看了《无问西东》。所有角色里，你最喜欢吴岭澜，集文人气质与浪漫于一身。我依稀记得电影里关于真实的探讨：  </p>
+<p><em>人把自己置身于忙碌当中，有一种麻木的踏实，但丧失了真实，你的青春也不过只有这些日子。</em>  </p>
+<p><em>什么是真实？</em> </p>
+<p><em>你看到什么，听到什么，做什么，和谁在一起，有一种，从心灵深处，满溢出来的不懊悔，也不羞耻的平和与喜悦。</em>  </p>
+<p>一苇，愿你早已找到属于自己的真实。</p>
+<h2 id="一起疯狂的新年音乐会"><a href="#一起疯狂的新年音乐会" class="headerlink" title="一起疯狂的新年音乐会"></a>一起疯狂的新年音乐会</h2><p>记得大二那年，我们背着复习资料去甘肃大剧院听维也纳新年音乐会。<br>曲终人散时，我们被交响乐的美妙深深震撼。<br>返程时坐公交高德忘了让我俩下车，我们一路坐到小西湖。靠着好心人的零钱，在新年钟声敲响前赶回宿舍，在公交车上快乐地祝福彼此新年快乐。  </p>
+<p>这或许是孤独如我，大学以来最印象深刻 最有仪式感 最快乐的新年。<br>感谢有你的陪伴。希望多年后我们想起2018新年，热泪盈眶。</p>
+<p><img src="https://www.event51.com/image/image/show-event-picture?fileName=2018-06-25_09-25-17__Qttqwul_ae68sGeIeD04yu747qw62gqt.jpg" alt="avatar">  </p>
+<h2 id="一起喝过的咖啡"><a href="#一起喝过的咖啡" class="headerlink" title="一起喝过的咖啡"></a>一起喝过的咖啡</h2><p>一苇君超爱喝咖啡的~虽然我喝咖啡常常会胃疼。今年九月初我们穿越大街小巷寻找安静的咖啡厅(别想在咖啡厅自习，放弃吧！少年！)，肥宅如我也算因此见识了兰大附近大大小小的茶饮店/咖啡馆。  </p>
+<p>亲爱的一苇，希望未来会有一如你沉静美好的少年，陪伴在你身边，静静看你喝咖啡的模样。  </p>
+<p><img src="https://cw1.tw/CH/images/channel_master/34108ffc-dd36-4904-a8f5-2d1eb0570774.jpg" alt="avatar">  </p>
+<p>亲爱的一苇，2020年2月2日，22岁，生日快乐！我会一直在你身后，支持你坚定的选择，期待着你的光明未来。</p>
+]]></content>
+      <categories>
+        <category>日常</category>
+      </categories>
+      <tags>
+        <tag>温情</tag>
+      </tags>
+  </entry>
+</search>
