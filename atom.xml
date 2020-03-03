@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Veal&#39;s Blog</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2020-03-02T15:47:30.313Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Veal</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C语言二维数组内存操纵问题</title>
+    <link href="http://yoursite.com/2020/03/02/return-2d-array-in-c/"/>
+    <id>http://yoursite.com/2020/03/02/return-2d-array-in-c/</id>
+    <published>2020-03-02T15:37:48.000Z</published>
+    <updated>2020-03-02T15:47:30.313Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;看到这个标题，就知道是某个睡过大一的学渣来补C指针的坑了。&lt;br&gt;怕问得太多惹大佬同学烦，于是卑微大学生求助C++老师(老师:哦？现在知道学习了？)，竟得到董老师的耐心解答~&lt;br&gt;在平时与他人的交流讨论中，如能指个方向我都十分感激；但只有老师，关心你是否真正弄清概念，董老师甚至设计实验让我去尝试分析运行结果。&lt;br&gt;能成为你们的学生，真幸运。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="2d-array" scheme="http://yoursite.com/tags/2d-array/"/>
+    
+      <category term="C" scheme="http://yoursite.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>texlive + vscode书写中文tex</title>
+    <link href="http://yoursite.com/2020/02/24/tex/"/>
+    <id>http://yoursite.com/2020/02/24/tex/</id>
+    <published>2020-02-24T05:25:36.000Z</published>
+    <updated>2020-02-24T12:07:19.586Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;毕业季将至，每想到毕业设计截稿将至则忧心焦虑，不敢再摸鱼冲浪。因此，在vscode上装好texlive，为接下来的成果书写准备一个完美的环境吧~   &lt;/p&gt;
+&lt;p&gt;网上关于这方面的教程很多，本不必重复再写，但在安装过程中遇到报错&lt;em&gt;vscode Recipe terminated with fatal error: spawn xelatex ENOENT&lt;/em&gt;，如你也遇到相似问题，拉到最后尝试下我的方法~&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="texlive" scheme="http://yoursite.com/tags/texlive/"/>
+    
+      <category term="vscode" scheme="http://yoursite.com/tags/vscode/"/>
+    
+      <category term="MiKTeX" scheme="http://yoursite.com/tags/MiKTeX/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>探究pytorch中的backward函数</title>
+    <link href="http://yoursite.com/2020/02/05/backward/"/>
+    <id>http://yoursite.com/2020/02/05/backward/</id>
+    <published>2020-02-05T15:38:10.000Z</published>
+    <updated>2020-02-06T02:10:54.446Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;众所周知 在深度机器学习/机器学习任务中需要对损失函数求梯度&lt;br&gt;一般地 $loss(\overrightarrow{x})$为数量函数&lt;br&gt;则我们知道dim($\frac{\partial l}{\partial x}$)=dim($x$)&lt;br&gt;因此常见代码如下 &lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;x=torch.randn(&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;,requires_grad=&lt;span class=&quot;literal&quot;&gt;True&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;l=(x*x).sum()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;l.backward()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;print(x.grad)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="pytorch" scheme="http://yoursite.com/tags/pytorch/"/>
+    
+      <category term="backward" scheme="http://yoursite.com/tags/backward/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>远端jupyter及BERT环境配置</title>
+    <link href="http://yoursite.com/2020/02/04/envset-1/"/>
+    <id>http://yoursite.com/2020/02/04/envset-1/</id>
+    <published>2020-02-04T12:26:26.000Z</published>
+    <updated>2020-02-05T02:03:36.386Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;系统配置: CentOS 7 x86_64 cpu-only&lt;br&gt;普通用户: user  &lt;/p&gt;
+&lt;h2 id=&quot;Ananconda-环境配置&quot;&gt;&lt;a href=&quot;#Ananconda-环境配置&quot; class=&quot;headerlink&quot; title=&quot;Ananconda 环境配置&quot;&gt;&lt;/a&gt;Ananconda 环境配置&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;1 安装miniconda&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-latest-Linux-x86_64.sh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;确定将conda加入环境变量  &lt;/p&gt;
+&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;source ~/.bashrc&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;conda list&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;如conda list运行正常 则成功安装  &lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="anaconda" scheme="http://yoursite.com/tags/anaconda/"/>
+    
+      <category term="jupyter notebook" scheme="http://yoursite.com/tags/jupyter-notebook/"/>
+    
+      <category term="服务部署" scheme="http://yoursite.com/tags/%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>亲爱的一苇</title>
+    <link href="http://yoursite.com/2020/02/02/blog/"/>
+    <id>http://yoursite.com/2020/02/02/blog/</id>
+    <published>2020-02-02T13:03:02.753Z</published>
+    <updated>2020-02-05T02:04:30.209Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天是 2020年2月2日 一苇 22岁生日快乐！  &lt;/p&gt;
+&lt;p&gt;我还记得我们初遇的盛夏，你穿着裙子笑起来温婉可人。采购东西回宿舍的路上，主动伸出手帮我，当时我在心里感慨：这个女孩子好善解人意呀~后来我慢慢意识到，有些人骨子里的善良与教养总会体现在不经意处。  &lt;/p&gt;
+&lt;p&gt;于我而言，独自穿行是生命的常态，时常被外界贴上无趣清高的标签也无谓。感谢你愿意走进我，我们在新年音乐会疯狂，在兰州夜色无问西东，在积石堂共赏斜阳。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="日常" scheme="http://yoursite.com/categories/%E6%97%A5%E5%B8%B8/"/>
+    
+    
+      <category term="温情" scheme="http://yoursite.com/tags/%E6%B8%A9%E6%83%85/"/>
+    
+  </entry>
+  
+</feed>
