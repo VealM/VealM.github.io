@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="https://vealm.gitee.io/"/>
   <updated>2020-03-02T15:47:30.313Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>https://vealm.gitee.io/</id>
   
   <author>
     <name>Veal</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>C语言二维数组内存操纵问题</title>
-    <link href="http://yoursite.com/2020/03/02/return-2d-array-in-c/"/>
-    <id>http://yoursite.com/2020/03/02/return-2d-array-in-c/</id>
+    <link href="https://vealm.gitee.io/2020/03/02/return-2d-array-in-c/"/>
+    <id>https://vealm.gitee.io/2020/03/02/return-2d-array-in-c/</id>
     <published>2020-03-02T15:37:48.000Z</published>
     <updated>2020-03-02T15:47:30.313Z</updated>
     
@@ -30,19 +30,19 @@
     </summary>
     
     
-      <category term="技术" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="https://vealm.gitee.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="2d-array" scheme="http://yoursite.com/tags/2d-array/"/>
+      <category term="2d-array" scheme="https://vealm.gitee.io/tags/2d-array/"/>
     
-      <category term="C" scheme="http://yoursite.com/tags/C/"/>
+      <category term="C" scheme="https://vealm.gitee.io/tags/C/"/>
     
   </entry>
   
   <entry>
     <title>texlive + vscode书写中文tex</title>
-    <link href="http://yoursite.com/2020/02/24/tex/"/>
-    <id>http://yoursite.com/2020/02/24/tex/</id>
+    <link href="https://vealm.gitee.io/2020/02/24/tex/"/>
+    <id>https://vealm.gitee.io/2020/02/24/tex/</id>
     <published>2020-02-24T05:25:36.000Z</published>
     <updated>2020-02-24T12:07:19.586Z</updated>
     
@@ -54,21 +54,21 @@
     </summary>
     
     
-      <category term="技术" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="https://vealm.gitee.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="texlive" scheme="http://yoursite.com/tags/texlive/"/>
+      <category term="texlive" scheme="https://vealm.gitee.io/tags/texlive/"/>
     
-      <category term="vscode" scheme="http://yoursite.com/tags/vscode/"/>
+      <category term="vscode" scheme="https://vealm.gitee.io/tags/vscode/"/>
     
-      <category term="MiKTeX" scheme="http://yoursite.com/tags/MiKTeX/"/>
+      <category term="MiKTeX" scheme="https://vealm.gitee.io/tags/MiKTeX/"/>
     
   </entry>
   
   <entry>
     <title>探究pytorch中的backward函数</title>
-    <link href="http://yoursite.com/2020/02/05/backward/"/>
-    <id>http://yoursite.com/2020/02/05/backward/</id>
+    <link href="https://vealm.gitee.io/2020/02/05/backward/"/>
+    <id>https://vealm.gitee.io/2020/02/05/backward/</id>
     <published>2020-02-05T15:38:10.000Z</published>
     <updated>2020-02-06T02:10:54.446Z</updated>
     
@@ -80,19 +80,19 @@
     </summary>
     
     
-      <category term="技术" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="https://vealm.gitee.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="pytorch" scheme="http://yoursite.com/tags/pytorch/"/>
+      <category term="pytorch" scheme="https://vealm.gitee.io/tags/pytorch/"/>
     
-      <category term="backward" scheme="http://yoursite.com/tags/backward/"/>
+      <category term="backward" scheme="https://vealm.gitee.io/tags/backward/"/>
     
   </entry>
   
   <entry>
     <title>远端jupyter及BERT环境配置</title>
-    <link href="http://yoursite.com/2020/02/04/envset-1/"/>
-    <id>http://yoursite.com/2020/02/04/envset-1/</id>
+    <link href="https://vealm.gitee.io/2020/02/04/envset-1/"/>
+    <id>https://vealm.gitee.io/2020/02/04/envset-1/</id>
     <published>2020-02-04T12:26:26.000Z</published>
     <updated>2020-02-05T02:03:36.386Z</updated>
     
@@ -112,21 +112,21 @@
     </summary>
     
     
-      <category term="技术" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="https://vealm.gitee.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="anaconda" scheme="http://yoursite.com/tags/anaconda/"/>
+      <category term="anaconda" scheme="https://vealm.gitee.io/tags/anaconda/"/>
     
-      <category term="jupyter notebook" scheme="http://yoursite.com/tags/jupyter-notebook/"/>
+      <category term="jupyter notebook" scheme="https://vealm.gitee.io/tags/jupyter-notebook/"/>
     
-      <category term="服务部署" scheme="http://yoursite.com/tags/%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2/"/>
+      <category term="服务部署" scheme="https://vealm.gitee.io/tags/%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2/"/>
     
   </entry>
   
   <entry>
     <title>亲爱的一苇</title>
-    <link href="http://yoursite.com/2020/02/02/blog/"/>
-    <id>http://yoursite.com/2020/02/02/blog/</id>
+    <link href="https://vealm.gitee.io/2020/02/02/blog/"/>
+    <id>https://vealm.gitee.io/2020/02/02/blog/</id>
     <published>2020-02-02T13:03:02.753Z</published>
     <updated>2020-02-05T02:04:30.209Z</updated>
     
@@ -139,10 +139,10 @@
     </summary>
     
     
-      <category term="日常" scheme="http://yoursite.com/categories/%E6%97%A5%E5%B8%B8/"/>
+      <category term="日常" scheme="https://vealm.gitee.io/categories/%E6%97%A5%E5%B8%B8/"/>
     
     
-      <category term="温情" scheme="http://yoursite.com/tags/%E6%B8%A9%E6%83%85/"/>
+      <category term="温情" scheme="https://vealm.gitee.io/tags/%E6%B8%A9%E6%83%85/"/>
     
   </entry>
   
