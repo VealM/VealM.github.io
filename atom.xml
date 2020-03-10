@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://vealm.gitee.io/"/>
-  <updated>2020-03-02T15:47:30.313Z</updated>
+  <updated>2020-03-10T11:24:57.347Z</updated>
   <id>https://vealm.gitee.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>岁月过客</title>
+    <link href="https://vealm.gitee.io/2020/03/09/grow/"/>
+    <id>https://vealm.gitee.io/2020/03/09/grow/</id>
+    <published>2020-03-09T13:57:27.000Z</published>
+    <updated>2020-03-10T11:24:57.347Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;觉醒&quot;&gt;&lt;a href=&quot;#觉醒&quot; class=&quot;headerlink&quot; title=&quot;觉醒&quot;&gt;&lt;/a&gt;觉醒&lt;/h2&gt;&lt;p&gt;22岁，或许我终于有资格说，不后悔来到兰州。&lt;br&gt;19年底正值为院创焦头烂额之际，我和高中好友骚老师通电话，以他的风格自然是给我一顿商业吹捧 “你真是一点没变，还是和高中一样。本科在兰州委屈你了，能去更好的。” ，全然不顾我的否认三连。电话挂断后，我不禁沉思，如果说不后悔，那么需要何种理由以超越高考排名对大学的评判呢。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="日常" scheme="https://vealm.gitee.io/categories/%E6%97%A5%E5%B8%B8/"/>
+    
+    
+      <category term="温情" scheme="https://vealm.gitee.io/tags/%E6%B8%A9%E6%83%85/"/>
+    
+  </entry>
   
   <entry>
     <title>C语言二维数组内存操纵问题</title>
