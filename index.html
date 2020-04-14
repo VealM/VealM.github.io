@@ -111,91 +111,9 @@
       
       <p>本篇文章提供通过<a href="https://github.com/XX-net/XX-Net" target="_blank" rel="noopener">XX-net</a>访问互联网的方式，尤其适用于Ipv6用户(高校、互联网大厂均分配ipv6)。</p>
 <p>本篇仅提供ipv4-win10-chrome浏览器(最常见)接入XX-net方式以及常见问题的分析。</p>
-<h2 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h2><p>首先我将对整个流程进行解读(瞎掰)，把握主体思路有利于解决半路杀出的bug。</p>
-<p>XX-net的前身是GoAgent代理，采用python语言编写。与熟知的SS/SSR/V2arrayN代理相似，其也是通过中转海外服务器进行数据传输，但也有不同之处——XX-net接入谷歌数据中心利用云应用进行数据传输，因此它理论上是免费的。</p>
-<p>利用以下数据传输图描述SS与XX-net数据传输路径:</p>
-<p>SS客户端 &lt;=Socks5==&gt;(SSlocal&lt;=密文=&gt;)  SS服务端  —&gt;海外目标主机(谷歌)</p>
-<p>XX-net客户端 &lt;==&gt; 全球谷歌数据中心 &lt;–&gt; 谷歌云GAE(需要通过开发者账户申请，XX-net提供公共AppId)</p>
-<p>由此我们可以看出，XX-net通过扫描可用全球谷歌数据中心ip及接入白嫖谷歌云app实现免费数据传输(是呀不用租海外服务器了)。但是相比SS缺少加密机制，网络报文中会暴露数据隐私，但仅作科研使用问题不大。</p>
-<p>根据我的体验来说，相比于SSR，XX-net的麻烦在于</p>
-<ul>
-<li><p>1 扫描可用的谷歌数据中心ip（出于种种原因，谷歌并没有被完全封锁，但活的ip也很少了）<br>以及遇到很奇怪的事，我分别开通过GAE香港和GAE美国，对于GAE香港检测ip通过率高于GAE美国(切换到美国可使用ip数会一直降)，或许可用ip数的检测是以两跳结果(ip中心–&gt;GAE)作为判断？</p>
-</li>
-<li><p>2 申请私用谷歌云app。尽管XX-net提供公用ip，但是用的人数过多因此限制仅浏览网页，禁止观看视频或下载。</p>
-</li>
-<li><p>3 对移动端支持不好。爱折腾如我都懒得折腾了…但你可以梅林路由器跑全局！</p>
-</li>
-</ul>
-<p>以下部分在叙述基本使用方法的同时会兼顾以上三个难点的分析。</p>
-<h2 id="安装XX-net"><a href="#安装XX-net" class="headerlink" title="安装XX-net"></a>安装XX-net</h2><ul>
-<li><p>1 认准github地址，下载对应版本<a href="https://github.com/XX-net/XX-Net/blob/master/code/default/download.md" target="_blank" rel="noopener">XX-net</a></p>
-</li>
-<li><p>2 解压后点击 start.vbs进行安装。如弹出是否信任，是否授权，一律同意。</p>
-</li>
-<li><p>3 此时chrome浏览器将弹出localhost:8085要求进行相关配置。同时在电脑侧边栏将看到XX-net运行标志，右键修改代理方式为全局PAC智能代理。</p>
-</li>
-</ul>
-<p>插曲: 我也试了浏览器代理方式，但似乎…效果不太行…所以我感觉修改为全局PAC智能代理就可以啦。项目作者提供的两种方法二选一即可，这里即为PAC代理方法</p>
-<p><a href="https://github.com/XX-net/XX-Net/wiki/%E4%BD%BF%E7%94%A8Chrome%E6%B5%8F%E8%A7%88%E5%99%A8" target="_blank" rel="noopener">官方方法</a></p>
-<p>注意，如果你的chrome浏览器过高，可能是不支持拖入crx文件安装拓展的。</p>
-<h2 id="测试能否通过公共id访问互联网"><a href="#测试能否通过公共id访问互联网" class="headerlink" title="测试能否通过公共id访问互联网"></a>测试能否通过公共id访问互联网</h2><p>以上仅完成客户端安装，由于客户端内自带公共id，因此根据原理分析可知，此时需要扫描可用谷歌数据中心ip。</p>
-<p>注意到作者的哭诉</p>
-<p><em>由于封锁严重，软件自带IP已经被封杀殆尽。因此需要数分钟到数小时的初始化IP扫描，方能正常运行。</em></p>
-<p>在8085端口的配置页我们可以看到状态:</p>
-<p><img src="https://i.loli.net/2020/03/12/kKc7umHX5FoONlS.png" alt="pic1.png"></p>
-<p>对于刚安装完XX-net的情况下，通常你并不会那么幸运看到这行蓝字，更多的是</p>
-<p><em>尚未建立连接</em><br><em>建议开启ipv6或XX-Tunel</em><br><em>浏览器配置有问题</em></p>
-<p>如果是3，请检查浏览器代理设置是否为OK，如果不是，重启XX-net客户端。如果重启失败，参考<a href="https://github.com/XX-net/XX-Net/wiki/How-to-get-start-error-log" target="_blank" rel="noopener">这里</a></p>
-<p>如果是1或2，此时检查有效ip数是否为0以及连接池是否为0:0:0。如果是，说明暂时未扫描到可用的谷歌数据中心ip。</p>
-<p>如何解决？</p>
-<ul>
-<li>1 增大扫描强度。按如下参数进行设置</li>
-</ul>
-<p><img src="https://i.loli.net/2020/03/12/oPw46SWHkaugRZG.png" alt="pic2.png"><br><img src="https://i.loli.net/2020/03/12/i2CKNbjkFDXsynV.png" alt="pic3.png"></p>
-<p>记得修改后提交</p>
-<ul>
-<li>2 查看扫描日志 是否正在扫描，如作者所言，初始化扫描需要数分钟到小时，耐心等待。</li>
-</ul>
-<p><img src="https://i.loli.net/2020/03/12/yNY1VxauzismM4e.png" alt="pic4.png"></p>
-<p>嗯，我能用的ip背后有多少time out的ip牺牲了。</p>
-<p>所以强烈ipv6用户开启ipv6服务，在设置页也进行详尽介绍。但超出本文范围(目前没得ipv6用啊)相信我，一旦开启ipv6，扫描ip数瞬间上百！</p>
-<p>以及理论上，不心疼电费可以把电脑开机联网让它扫描个几天几夜，这样你就会拥有很多可用ip！</p>
-<ul>
-<li>3 如果还是未连接…</li>
-</ul>
-<p>可以联系获取可用ip…不过作为ipv6用户能不和可怜的ipv4用户抢ip了么呜呜呜。</p>
-<p>当你查看状态，出现和我一致的蓝字，那么恭喜你，可成功访问真正的互联网了！</p>
-<h2 id="部署私有AppId"><a href="#部署私有AppId" class="headerlink" title="部署私有AppId"></a>部署私有AppId</h2><p>此步可选，如果用gmail账号且不怕麻烦，建议这样做。由于AppId每天限制流量1G且个人gmail账号app申请受限，假如你是我的密友且计算机接触不多，我会部署好app并把个人id给你用，直接进入<strong>录入AppId</strong>。(虽然我喜欢研究技术，但真正的收获是理清系统思路而不是给别人当24小时客服吧，我又没对谁收费过。)</p>
-<p>为了减缓公共资源的使用，建议申请私有AppId，也即你的谷歌云应用。申请方式如下</p>
-<ul>
-<li>1 注册谷歌gmail账号</li>
-</ul>
-<p>注册gmail账号需要海外手机号接收短信，欢迎在海外留学的同学帮忙接收注册验证码，不会对你造成负面影响，作为答谢在网络可用情形下为你部署app。</p>
-<ul>
-<li><p>2 用gmail账号登录谷歌云申请私人AppId</p>
-<ul>
-<li><p>1 创建你的云应用<br>  进入<a href="https://console.cloud.google.com/start" target="_blank" rel="noopener">网页</a><br>  点击选择项目，然后点击创建项目<br>  <img src="https://cloud.githubusercontent.com/assets/19320102/26750556/af503ee2-4858-11e7-811b-30367691d912.png" alt="avatar"><br>  <img src="https://cloud.githubusercontent.com/assets/19320102/26750550/6abaaed4-4858-11e7-8386-e07f0391325f.png" alt="avatar"></p>
-<p>  输入project名称系统自动生成AppId(ProjectId),请不要填写个人信息相关，web ios android也请不要写。</p>
-</li>
-<li><p>2 设置AppID的App引擎</p>
-<p>  访问APP引擎信息中心， <a href="https://console.cloud.google.com/appengine/start?project=你的项目id" target="_blank" rel="noopener">https://console.cloud.google.com/appengine/start?project=你的项目id</a></p>
-<p>  选择地点默认us-central即可。(但有条件的建议选择asia-east2香港节点)</p>
-<p>  默认项目语言即为python，无需修改。绑定信用卡(biling)为可选项，跳过即可。查看右上角创建状态，如成功 返回8085进行部署。</p>
-<p>  同时热烈欢迎有条件的朋友绑信用卡，我想体验下谷歌赠送的一年期的云服务器…(不会像AWS自动续费，而且申请服务器后随时都可解绑吧)</p>
-</li>
-<li><p>3 部署AppId</p>
-<p>  回到8085界面 进行部署<br><img src="https://i.loli.net/2020/03/12/vcUmYHMQIAVxGXe.png" alt="pic5.png"></p>
-<p>输入2获取的AppId，点击开始部署，打开显示日志并密切监控。请允许浏览器弹出窗口，经过若干分钟的等待后会进入gmail授权界面，当出现部署成功后，则该AppId可用。</p>
-<p>番外: 这里有个bug，就是初始扫描获得的ip延迟挺大的，导致gmail授权界面经常出现504错误。嗯…这时不要着急，根据我对日志的观察客户端会反复尝试直至登入。<br>所以我还在想，是否有种方式可以不通过XX-net而直接对app进行部署呢？(因为我有买稳梯子连入谷歌)这样就可以直接进入录入ID环节，无需过久等待。<br>我找到了，在接入稳梯子的情形下可使用脚本部署<br><a href="https://github.com/XX-net/XX-Net/tree/master/code/default/gae_proxy/server" target="_blank" rel="noopener">脚本部署</a></p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="录入AppId"><a href="#录入AppId" class="headerlink" title="录入AppId"></a>录入AppId</h2><p><img src="https://i.loli.net/2020/03/12/6FrN45azPjUQ3MC.png" alt="pic6.png"></p>
-<p>公共Id只能浏览网页，不能下载，不能看视频。因此私有Id还是很有必要的。</p>
-<p>在这里进行录入Id的配置，将已经成功部署的AppId填入就可以啦。当然啦，你也可以从好朋友那里获得已部署的AppId进行录入。经过若干分钟的等待，你就可以自由看视频啦！</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>请大家去github上支持下作者！<br>有钱的出钱，支持<a href="https://github.com/XX-net/XX-Net/wiki/X-Tunnel%E4%BB%8B%E7%BB%8D" target="_blank" rel="noopener">X-Tunnel</a> 年度会员15美元,月均10rmb不到<br>有账号的出账号，捐赠私有AppId作为公共Id<br>如果想感谢我也欢迎（</p>
-
+      
+      <a class="article-more-link" href="/2020/03/12/www/">阅读更多...</a>
+      
       
       <!-- 打赏 -->
       

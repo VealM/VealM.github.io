@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://vealm.gitee.io/"/>
-  <updated>2020-03-14T11:46:34.811Z</updated>
+  <updated>2020-04-14T14:26:02.960Z</updated>
   <id>https://vealm.gitee.io/</id>
   
   <author>
@@ -21,17 +21,12 @@
     <link href="https://vealm.gitee.io/2020/03/12/www/"/>
     <id>https://vealm.gitee.io/2020/03/12/www/</id>
     <published>2020-03-12T08:51:39.000Z</published>
-    <updated>2020-03-14T11:46:34.811Z</updated>
+    <updated>2020-04-14T14:26:02.960Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;本篇文章提供通过&lt;a href=&quot;https://github.com/XX-net/XX-Net&quot; target=&quot;_blank&quot;
-        
-      
+      &lt;p&gt;本篇文章提供通过&lt;a href=&quot;https://github.com/XX-net/XX-Net&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;XX-net&lt;/a&gt;访问互联网的方式，尤其适用于Ipv6用户(高校、互联网大厂均分配ipv6)。&lt;/p&gt;
+&lt;p&gt;本篇仅提供ipv4-win10-chrome浏览器(最常见)接入XX-net方式以及常见问题的分析。&lt;/p&gt;
     
     </summary>
     

@@ -5,6 +5,8 @@
     <url>/2020/03/12/www/</url>
     <content><![CDATA[<p>本篇文章提供通过<a href="https://github.com/XX-net/XX-Net" target="_blank" rel="noopener">XX-net</a>访问互联网的方式，尤其适用于Ipv6用户(高校、互联网大厂均分配ipv6)。</p>
 <p>本篇仅提供ipv4-win10-chrome浏览器(最常见)接入XX-net方式以及常见问题的分析。</p>
+<a id="more"></a>
+
 <h2 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h2><p>首先我将对整个流程进行解读(瞎掰)，把握主体思路有利于解决半路杀出的bug。</p>
 <p>XX-net的前身是GoAgent代理，采用python语言编写。与熟知的SS/SSR/V2arrayN代理相似，其也是通过中转海外服务器进行数据传输，但也有不同之处——XX-net接入谷歌数据中心利用云应用进行数据传输，因此它理论上是免费的。</p>
 <p>利用以下数据传输图描述SS与XX-net数据传输路径:</p>
