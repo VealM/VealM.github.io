@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>jupyterlab激活虚拟环境</title>
+    <url>/2020/07/07/labjupyter/</url>
+    <content><![CDATA[<p>对于大型超算平台，通常采用jupyterlab作为用户接口，我们可以在web端创建、运行python程序。</p>
+<a id="more"></a>
+
+<div align="center"><img src="/images/labjupyter/lab.png",width="50%"></div>
+<div align="center"><font size=2>jupyterlab示例图(图源lzuhpc)</font></div>
+
+<p>为了给应用创建一套“隔离”的python环境（如在不同的环境中创建django网站、使用tensorflow进行数据分析），我们需要创建虚拟环境。我们以conda为例，在超算平台上创建虚拟环境安装tensorflow并在jupyterlab中使用它。</p>
+<h3 id="安装ananconda及环境变量配置"><a href="#安装ananconda及环境变量配置" class="headerlink" title="安装ananconda及环境变量配置"></a>安装ananconda及环境变量配置</h3><p>详情见<a href="https://vealm.gitee.io/2020/02/04/envset-1/">该博文</a>，本处略</p>
+<h3 id="创建tensorflow环境及安装"><a href="#创建tensorflow环境及安装" class="headerlink" title="创建tensorflow环境及安装"></a>创建tensorflow环境及安装</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">conda create --name tf2 python=3.7</span><br></pre></td></tr></table></figure>
+
+<p>创建tf2虚拟环境，指定python版本为3.7</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">conda activate tf2 # 激活tf2环境</span><br><span class="line">pip install tensorflow # 通过pip安装tensorflow</span><br></pre></td></tr></table></figure>
+
+<p>从tensorflow2起，不再对gpu与cpu版本进行区分，因此只需要直接安装即可，如果对版本敏感，可</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pip install tensorflow-cpu</span><br></pre></td></tr></table></figure>
+
+<p>如果一切顺利，可在终端正常运行以下代码</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">conda acitvate tf2</span><br><span class="line">python</span><br><span class="line">Python 3.7.7 (default, May  7 2020, 21:25:33) </span><br><span class="line">[GCC 7.3.0] :: Anaconda, Inc. on linux</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; import tensorflow as tf</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; A = tf.constant([[1, 2], [3, 4]]) </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 可能伴有一些信息输出 可暂时无视</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; B = tf.constant([[5, 6], [7, 8]])</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; C = tf.matmul(A, B)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; <span class="built_in">print</span>(C)</span></span><br><span class="line">tf.Tensor(</span><br><span class="line">[[19 22]</span><br><span class="line"> [43 50]], shape=(2, 2), dtype=int32)</span><br></pre></td></tr></table></figure>
+
+<p>如果C能正常输出，则说明已安装成功</p>
+<h3 id="在jupyterlab中使用tensorflow"><a href="#在jupyterlab中使用tensorflow" class="headerlink" title="在jupyterlab中使用tensorflow"></a>在jupyterlab中使用tensorflow</h3><p>lzuhpc提供了jupyterlab的用户接口，方便代码调试，但其默认是base环境，因此我们需要安装相关包以激活tf2虚拟环境</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">conda activate tf2 # 激活tf2虚拟环境</span><br><span class="line">conda install ipykernel</span><br><span class="line">ipython install --user --name tf2 # ipython安装tf2虚拟环境</span><br></pre></td></tr></table></figure>
+
+<p>此时进入jupyterlab，可以看到创建新文件中多了tf2，点击进行新文件创建即可使用tensorflow。</p>
+<div align="center"><img src="/images/labjupyter/lab.png",width="50%"></div>
+<div align="center"><font size=2>jupyterlab示例图(图源lzuhpc)</font></div>
+
+<br>
+
+<div align="center"><img src="/images/labjupyter/tf2.png",width="50%"></div>
+<div align="center"><font size=2>tf2笔记本示意图(图源lzuhpc)</font></div>]]></content>
+      <tags>
+        <tag>hpccluster</tag>
+        <tag>jupyter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>访问互联网指南</title>
     <url>/2020/03/12/www/</url>
     <content><![CDATA[<p>本篇文章提供通过<a href="https://github.com/XX-net/XX-Net" target="_blank" rel="noopener">XX-net</a>访问互联网的方式，尤其适用于Ipv6用户(高校、互联网大厂均分配ipv6)。</p>

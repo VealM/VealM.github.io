@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://vealm.gitee.io/"/>
-  <updated>2020-04-14T14:26:02.960Z</updated>
+  <updated>2020-07-07T10:33:02.053Z</updated>
   <id>https://vealm.gitee.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>jupyterlab激活虚拟环境</title>
+    <link href="https://vealm.gitee.io/2020/07/07/labjupyter/"/>
+    <id>https://vealm.gitee.io/2020/07/07/labjupyter/</id>
+    <published>2020-07-07T09:04:33.000Z</published>
+    <updated>2020-07-07T10:33:02.053Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;对于大型超算平台，通常采用jupyterlab作为用户接口，我们可以在web端创建、运行python程序。&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="hpccluster" scheme="https://vealm.gitee.io/tags/hpccluster/"/>
+    
+      <category term="jupyter" scheme="https://vealm.gitee.io/tags/jupyter/"/>
+    
+  </entry>
   
   <entry>
     <title>访问互联网指南</title>
