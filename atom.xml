@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://vealm.gitee.io/"/>
-  <updated>2020-07-07T10:33:02.053Z</updated>
+  <updated>2020-07-25T14:41:51.902Z</updated>
   <id>https://vealm.gitee.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>powershell美化</title>
+    <link href="https://vealm.gitee.io/2020/07/25/beautyposh/"/>
+    <id>https://vealm.gitee.io/2020/07/25/beautyposh/</id>
+    <published>2020-07-25T08:09:31.000Z</published>
+    <updated>2020-07-25T14:41:51.902Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;早上睁眼就收到阿里云服务器已过期的短信，但我都习惯了vscode + remotessh在linux上写各种HelloWorld了…主要爽在命令行的高效操作（rm -rf /*）和包管理，那么试试在win10下进行折腾~&lt;br&gt;主要思路为：&lt;br&gt;利用&lt;a href=&quot;https://github.com/JanDeDobbeleer/oh-my-posh&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;oh-my-posh&lt;/a&gt;对powershell进行强化（命令行）&lt;br&gt;使用&lt;a href=&quot;https://scoop.sh/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;scoop&lt;/a&gt;进行包管理&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="https://vealm.gitee.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="玩" scheme="https://vealm.gitee.io/tags/%E7%8E%A9/"/>
+    
+  </entry>
   
   <entry>
     <title>jupyterlab激活虚拟环境</title>

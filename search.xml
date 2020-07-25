@@ -1,6 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>powershell美化</title>
+    <url>/2020/07/25/beautyposh/</url>
+    <content><![CDATA[<p>早上睁眼就收到阿里云服务器已过期的短信，但我都习惯了vscode + remotessh在linux上写各种HelloWorld了…主要爽在命令行的高效操作（rm -rf /*）和包管理，那么试试在win10下进行折腾~<br>主要思路为：<br>利用<a href="https://github.com/JanDeDobbeleer/oh-my-posh" target="_blank" rel="noopener">oh-my-posh</a>对powershell进行强化（命令行）<br>使用<a href="https://scoop.sh/" target="_blank" rel="noopener">scoop</a>进行包管理</p>
+<a id="more"></a>
+
+<h2 id="powershell篇"><a href="#powershell篇" class="headerlink" title="powershell篇"></a>powershell篇</h2><p>这里列一些必要的打卡及查看终端属性的方式。<br><strong>启动powershell</strong>：<br>win + r</p>
+<div align="center"><img src="/images/beautyposh/cmd.png"></div>
+确定后打开powershell
+<div align="center"><img src="/images/beautyposh/shell.png"></div>
+
+<p><strong>查看基本属性</strong>：<br>右键打开属性</p>
+<div align="center"><img src="/images/beautyposh/settings.png"></div>
+查看字体等属性
+<div align="center"><img src="/images/beautyposh/font.png"></div>
+
+<h3 id="安装更纱黑体"><a href="#安装更纱黑体" class="headerlink" title="安装更纱黑体"></a>安装更纱黑体</h3><p>powershell中的默认字体是新宋体，我们安装<a href="https://github.com/be5invis/Sarasa-Gothic" target="_blank" rel="noopener">更纱黑体</a>以解决中英文兼容问题</p>
+<h4 id="从微软应用商店安装"><a href="#从微软应用商店安装" class="headerlink" title="从微软应用商店安装"></a>从微软应用商店安装</h4><p>点击<a href="https://www.microsoft.com/zh-cn/p/%E6%9B%B4%E7%BA%B1%E9%BB%91%E4%BD%93/9mw0m424ncz7?activetab=pivot:overviewtab" target="_blank" rel="noopener">更纱黑体页面</a>，选择安装进入到微软商店下载相关包即可。</p>
+<h5 id="查看安装是否生效"><a href="#查看安装是否生效" class="headerlink" title="查看安装是否生效"></a>查看安装是否生效</h5><p>查看powershell字体属性，如正常安装，则可以看到更纱黑体系列字体。</p>
+<div align="center"><img src="/images/beautyposh/font.png"></div>
+
+<h3 id="调整配色"><a href="#调整配色" class="headerlink" title="调整配色"></a>调整配色</h3><h4 id="原生powershell"><a href="#原生powershell" class="headerlink" title="原生powershell"></a>原生powershell</h4><h5 id="前端大佬专用"><a href="#前端大佬专用" class="headerlink" title="前端大佬专用"></a>前端大佬专用</h5><p>原生powershell启动快，但配色方案也有限，对自己审美有自信，进入属性依次调整各项<br>总之我对自己的审美失去了自信…</p>
+<div align="center"><img src="/images/beautyposh/myposh.png"></div>
+<div align="center"><font size=2>powershell配色效果图</font></div>
+
+<h5 id="使用ColorTool"><a href="#使用ColorTool" class="headerlink" title="使用ColorTool"></a>使用ColorTool</h5><p>当然还是使用配色模板更香啦<br>使用微软推出的<a href="https://github.com/microsoft/terminal/releases/tag/1904.29002" target="_blank" rel="noopener">ColorTool</a><br>解压后出现ColorTool.exe文件，运行即可。出于方便考虑，我们将ColorTool加入环境变量<br>按从左至右参考如图步骤添加ColorTool.exe所在文件夹至系统变量PATH中，并保存生效</p>
+<div align="center"><img src="/images/beautyposh/env.png"></div>
+<div align="center"><font size=2>不知道怎么配置环境变量的自行百度</font></div>
+
+<p>在终端中查看colortool自带默认模板<br><em>命令</em> color -s<br>(透明度导致短选项不太清晰呢…)</p>
+<div align="center"><img src="/images/beautyposh/default.png"></div>
+
+
+<p>使用colortool将他人模板应用于powershell</p>
+<div align="center"><img src="/images/beautyposh/template.png"></div>
+
+<p>模板文件类型是itermcolors，可以在这个<a href="https://iterm2colorschemes.com/" target="_blank" rel="noopener">网站</a>下载<br>（你可能需要科学上网才能访问…）<br>打开喜欢的模板链接，将该页面保存为*.itermcolors（不要以txt结尾！）即可~</p>
+<div align="center"><img src="/images/beautyposh/love.png"></div>
+
+<h4 id="Fluent-Terminal"><a href="#Fluent-Terminal" class="headerlink" title="Fluent Terminal"></a>Fluent Terminal</h4><p>Fluent Terminal是备受推荐的第三方终端，据说启动速度相当优异，但我试了下…感觉和原生速度差得还是蛮远的…</p>
+<h5 id="下载Fluent-Terminal"><a href="#下载Fluent-Terminal" class="headerlink" title="下载Fluent Terminal"></a>下载Fluent Terminal</h5><p>从<a href="https://www.microsoft.com/zh-cn/p/fluent-terminal/9p2krlmfxf9t?rtc=1&activetab=pivot:overviewtab" target="_blank" rel="noopener">微软商店</a>中进行获取或者在其页面进行<a href="https://github.com/felixse/FluentTerminal" target="_blank" rel="noopener">手动安装</a></p>
+<p>成功安装后打开页面如下（还是相当漂亮的~而且支持多标签页呀！）</p>
+<div align="center"><img src="/images/beautyposh/fluent.png" width=50%></div>
+
+<p>进入属性页，改变字体为等纱黑体</p>
+<div align="center"><img src="/images/beautyposh/ffont.png" width=50%></div>
+
+<p>选择喜欢的模板</p>
+<div align="center"><img src="/images/beautyposh/ftemp.png" width=50%></div>
+
+<p>除了loveplace和MyBash是我导入的模板，其余均为系统内置，其实ubuntu和homebrew就相当好看啦</p>
+<h6 id="彩蛋"><a href="#彩蛋" class="headerlink" title="彩蛋"></a>彩蛋</h6><p>Fluent Terminal还支持ssh，不过对于我已经装了openssh的这种用户来说，意义不大啦</p>
+<div align="center"><img src="/images/beautyposh/ssh.png" width=50%></div>
+
+<h3 id="安装oh-my-posh"><a href="#安装oh-my-posh" class="headerlink" title="安装oh-my-posh"></a>安装oh-my-posh</h3><p>现在安装<a href="https://github.com/JanDeDobbeleer/oh-my-posh" target="_blank" rel="noopener">oh-my-posh</a>真的很容易！<br>为了确保安装成功，在设置中应用开发者模式如下</p>
+<div align="center"><img src="/images/beautyposh/dev.png" width=50%></div>
+
+<p>并启动管理员powershell进行安装：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Install-Module posh-git -Scope CurrentUser</span><br><span class="line">Install-Module oh-my-posh -Scope CurrentUser</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建配置文件"><a href="#创建配置文件" class="headerlink" title="创建配置文件"></a>创建配置文件</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 如果无配置文件 则创建</span></span><br><span class="line">if (!(Test-Path -Path $PROFILE )) &#123; New-Item -Type File -Path $PROFILE -Force &#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 记事本打开</span></span><br><span class="line">notepad $PROFILE</span><br></pre></td></tr></table></figure>
+
+<p>在记事本中添加如下内容</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Import-Module posh-git </span><br><span class="line">Import-Module oh-my-posh </span><br><span class="line">Set-Theme Paradox # Paradox就是应用的主题 你也可以修改其他主题</span><br></pre></td></tr></table></figure>
+
+<h4 id="应用oh-my-posh"><a href="#应用oh-my-posh" class="headerlink" title="应用oh-my-posh"></a>应用oh-my-posh</h4><p>为了能够成功应用，你需要进行授权</p>
+<p>以管理员启动powershell</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">set-executionpolicy remotesigned</span><br></pre></td></tr></table></figure>
+
+<p>然后再重新打开powershell，不出意外会成功生效</p>
+<div align="center"><img src="/images/beautyposh/suc.png"></div>
+
+<p>关于更多oh-my-posh主题及自定义主题介绍，可以参考<a href="https://sspai.com/post/52907" target="_blank" rel="noopener">少数派</a>这篇文章在配置文件里设置。</p>
+<h3 id="在VSCode中应用oh-my-posh"><a href="#在VSCode中应用oh-my-posh" class="headerlink" title="在VSCode中应用oh-my-posh"></a>在VSCode中应用oh-my-posh</h3><p>如果直接打开VSCode，你会发现oh-my-posh主题的箭头不能正常显示，出现乱码。</p>
+<p>其实是中英字体兼容的问题，在设置里，添加等纱黑体即可解决<br>（你一定要看蓝色部分）</p>
+<div align="center"><img src="/images/beautyposh/vs.png"></div>
+
+<p>不出意外的话，你也会看到美腻的内置终端</p>
+<div align="center"><img src="/images/beautyposh/vsposh.png"></div>
+
+<h2 id="包管理器-Scoop"><a href="#包管理器-Scoop" class="headerlink" title="包管理器 Scoop"></a>包管理器 Scoop</h2><p>其实我没有装Scoop，但我还是要大力推荐下，因为上述所说的oh-my-posh等都可以通过scoop来安装。</p>
+<p>与debian下的apt、mac下的homebrew类似，scoop是windows下的包管理器，不过相比于chocolatey，它能够将应用隔离在ScoopApps中。</p>
+<p>我吐槽下自己没法装Scoop的原因吧：</p>
+<ol>
+<li>Scoop是直接从官网下载的，如果不能高速科学上网，呵呵，自行体验下。<br>当然你也可以现装aria2嘿嘿，那样还是快一些的</li>
+<li>默认安装在C盘用户目录下，有好处啊，比如省去配置环境变量的麻烦<br>但我就128G的SSD用来装系统盘…现在就剩30G了…平时只能软件装在500G的机械硬盘上…好了我也知道了为什么服务器全SSD盘装matlab好快，而我机械硬盘装了30min…</li>
+</ol>
+<p>（此处为废话：由此我得出结论了，如果你电脑是全SSD盘！那就不要分区！买个机械硬盘插在空仓位上存文件它不香么！）</p>
+<p>以及，有钱有技术的大佬能不能搭个scoop国内镜像呀QAQ</p>
+<p>参考博客</p>
+<p><a href="https://sspai.com/post/52907" target="_blank" rel="noopener">少数派</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>玩</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>jupyterlab激活虚拟环境</title>
     <url>/2020/07/07/labjupyter/</url>
     <content><![CDATA[<p>对于大型超算平台，通常采用jupyterlab作为用户接口，我们可以在web端创建、运行python程序。</p>
