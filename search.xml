@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>暑期刷题之旅</title>
+    <url>/2020/07/27/UVaOJ0/</url>
+    <content><![CDATA[<p>近期，老师和朋友建议暑期刷LeetCode以增加个人竞争力，关于未来规划，与其想得过多，不如先准备好议价的筹码。</p>
+<p>但毕竟是个非科班选手，本科选修的数据结构侧重介绍线性表、树、图的原理，尽管董老师课讲得非常好，但并不是个刷题班（惭愧，好像学得也快忘完了）。作为一个小白，估计刷LeetCode，大约就一直停留于Easy模式，难以前进…</p>
+<p>认清自己不想麻烦别人、也不想一劳永逸地报班的现实之后，我在电脑上打开吃灰的电子书文件夹，目前选择刘汝佳老师的《算法竞赛入门经典》为主，Sedgewick的《算法(C实现)》为辅，理由如下：</p>
+<ol>
+<li>《算法竞赛入门经典》题例较多，可以基本认为是分类题集，相比于随机刷题更具系统性</li>
+<li>《入门经典》相比于《算法》《算法导论》薄很多，给了我“开学前能刷完一半”的希望</li>
+<li>《入门经典》的缺憾在于对数据结构的实现介绍较少，而我也忘得差不多了，所以用《算法(C实现)》补充些理论知识</li>
+</ol>
+<p>总之，准备活动大概就是这样啦！flag就不立了，总之希望自己能踏实地刷好《入门经典》，经受住做题时“我怎么这么傻”的心理打击，在思考中提升智商与逻辑能力（</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>算法竞赛</tag>
+        <tag>刘汝佳</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>powershell美化</title>
     <url>/2020/07/25/beautyposh/</url>
     <content><![CDATA[<p>早上睁眼就收到阿里云服务器已过期的短信，但我都习惯了vscode + remotessh在linux上写各种HelloWorld了…主要爽在命令行的高效操作（rm -rf /*）和包管理，那么试试在win10下进行折腾~<br>主要思路为：<br>利用<a href="https://github.com/JanDeDobbeleer/oh-my-posh" target="_blank" rel="noopener">oh-my-posh</a>对powershell进行强化（命令行）<br>使用<a href="https://scoop.sh/" target="_blank" rel="noopener">scoop</a>进行包管理</p>
