@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://vealm.gitee.io/"/>
-  <updated>2020-08-01T13:24:26.357Z</updated>
+  <updated>2020-08-01T13:28:32.454Z</updated>
   <id>https://vealm.gitee.io/</id>
   
   <author>
@@ -21,17 +21,17 @@
     <link href="https://vealm.gitee.io/2020/07/30/UVaOJ2/"/>
     <id>https://vealm.gitee.io/2020/07/30/UVaOJ2/</id>
     <published>2020-07-30T09:27:52.000Z</published>
-    <updated>2020-08-01T13:24:26.357Z</updated>
+    <updated>2020-08-01T13:28:32.454Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;第三章主要介绍数组和字符串在算法中的应用，原书基于C语言风格字符数组，介绍sprintf, strchr等string.h库中方法。在本篇博客中记录与之对应cpp对于vector,
-        
-      
+      &lt;p&gt;第三章主要介绍数组和字符串在算法中的应用，原书基于C语言风格字符数组，介绍sprintf, strchr等string.h库中方法。在本篇博客中记录与之对应cpp对于vector, string的处理方法。&lt;/p&gt;
+&lt;p&gt;在知识构建方面，我倾向于按照以下思路逐步递进：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1 数据结构的定义与初始化&lt;/li&gt;
+&lt;li&gt;2 定义在数据结构上的基本操作&lt;/li&gt;
+&lt;li&gt;3 遍历访问&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
