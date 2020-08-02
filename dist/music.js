@@ -6,7 +6,7 @@ const ap = new APlayer({
 	{
         name: "My Soul",
         artist: 'July',
-        url: 'http://win.web.rh01.sycdn.kuwo.cn/a638a2edacd72ec08cbcf843e0b29f1b/5f262f99/resource/n2/3/16/1597751756.mp3',
+        url: 'https://demo.meting.api.meto.moe/action/metingapi?server=tencent&type=song&id=004OQ5Mt0EmEzv',
         cover: 'https://image.bugsm.co.kr/album/images/original/3239/323979.jpg',
     }
     ]
