@@ -303,7 +303,8 @@
 <p>因此，本题的思路是清晰的：我们将字符串按周期T分割为len(s)/T段，检查每段内对应位置是否相同。另外，题目要求输出最小周期，那么讨巧的办法自然是从周期1开始枚举。</p>
 <p>进一步，我们考虑用取模形式对周期串进行表达<br>对于周期T，字符串s有<br>$$s(i) = s(i%T), \quad i \in {T,\cdots, len(s)-1}$$</p>
 <p>这样，我们就将周期字符串的所有位置均转化到第一个周期内进行比较。</p>
-<h2 id="I-O效率的讨论"><a href="#I-O效率的讨论" class="headerlink" title="I/O效率的讨论"></a>I/O效率的讨论</h2> 
+<h2 id="I-O效率的讨论"><a href="#I-O效率的讨论" class="headerlink" title="I/O效率的讨论"></a>I/O效率的讨论</h2><p>IO效率讨论蛮有意思的<del>打算从文件流、重定向、cin与printf这四个方面来比较</del><br>针对字符串，还有getline、getchar方法，因此也需要从不同方法的角度来考虑，具体的测试和代码我已经做啦，参见<a href="https://gitee.com/VealM/UVaOJ/tree/master/Chapter3/textbook/iotest" target="_blank" rel="noopener">Gitee仓库</a>或<a href="https://github.com/VealM/UVaOJ/tree/master/Chapter3/textbook/iotest" target="_blank" rel="noopener">Github仓库</a>，具体的补充等我读完研究生论文再补上呜呜呜</p>
+ 
       <!-- reward -->
       
     </div>
