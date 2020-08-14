@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://vealm.gitee.io/"/>
-  <updated>2020-08-14T10:18:40.886Z</updated>
+  <updated>2020-08-14T10:43:49.648Z</updated>
   <id>https://vealm.gitee.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://vealm.gitee.io/2020/08/14/bign/"/>
     <id>https://vealm.gitee.io/2020/08/14/bign/</id>
     <published>2020-08-14T10:17:03.000Z</published>
-    <updated>2020-08-14T10:18:40.886Z</updated>
+    <updated>2020-08-14T10:43:49.648Z</updated>
     
     <summary type="html">
     
@@ -30,7 +30,7 @@
         
         
           &lt;p&gt;&lt;em&gt;大整数类断断续续写了两天，最后写除法的时候才发现最大的问题是没有明确的输入输出限制意识，导致隐藏bug&lt;/em&gt;&lt;br&gt;输入：必须为正整数，四则运算、比较运算符仅限于正整数之间&lt;br&gt;输出：减法输出可为负数，其余均应为非负整数。&lt;/p&gt;
-&lt;h2
+&lt;p&gt;完整代码见&lt;a
         
       
     
