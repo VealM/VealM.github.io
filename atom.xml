@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://vealm.gitee.io/"/>
-  <updated>2020-08-02T04:31:31.744Z</updated>
+  <updated>2020-08-14T10:18:40.886Z</updated>
   <id>https://vealm.gitee.io/</id>
   
   <author>
@@ -17,11 +17,71 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>大整数类设计文档</title>
+    <link href="https://vealm.gitee.io/2020/08/14/bign/"/>
+    <id>https://vealm.gitee.io/2020/08/14/bign/</id>
+    <published>2020-08-14T10:17:03.000Z</published>
+    <updated>2020-08-14T10:18:40.886Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;em&gt;大整数类断断续续写了两天，最后写除法的时候才发现最大的问题是没有明确的输入输出限制意识，导致隐藏bug&lt;/em&gt;&lt;br&gt;输入：必须为正整数，四则运算、比较运算符仅限于正整数之间&lt;br&gt;输出：减法输出可为负数，其余均应为非负整数。&lt;/p&gt;
+&lt;h2
+        
+      
+    
+    </summary>
+    
+    
+      <category term="算法竞赛" scheme="https://vealm.gitee.io/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/"/>
+    
+      <category term="cpp基础" scheme="https://vealm.gitee.io/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/cpp%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="cpp综合" scheme="https://vealm.gitee.io/tags/cpp%E7%BB%BC%E5%90%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>入门经典第三章之字符串（下）</title>
+    <link href="https://vealm.gitee.io/2020/08/06/UVaOJ3/"/>
+    <id>https://vealm.gitee.io/2020/08/06/UVaOJ3/</id>
+    <published>2020-08-06T01:13:43.000Z</published>
+    <updated>2020-08-10T05:56:35.530Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;在&lt;a href=&quot;https://vealm.gitee.io/2020/07/30/UVaOJ2/&quot;&gt;入门经典第三章之字符串（上）&lt;/a&gt;中，介绍了cpp字符串及定义其上的运算与操作，在本篇博客中，将结合入门经典的经典例题对字符串进行应用。&lt;/p&gt;
+&lt;h2
+        
+      
+    
+    </summary>
+    
+    
+      <category term="算法竞赛" scheme="https://vealm.gitee.io/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/"/>
+    
+      <category term="cpp基础" scheme="https://vealm.gitee.io/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/cpp%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="cpp字符串" scheme="https://vealm.gitee.io/tags/cpp%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+  </entry>
+  
+  <entry>
     <title>入门经典第三章之字符串（上）</title>
     <link href="https://vealm.gitee.io/2020/07/30/UVaOJ2/"/>
     <id>https://vealm.gitee.io/2020/07/30/UVaOJ2/</id>
     <published>2020-07-30T09:27:52.000Z</published>
-    <updated>2020-08-02T04:31:31.744Z</updated>
+    <updated>2020-08-02T05:16:46.562Z</updated>
     
     <summary type="html">
     
