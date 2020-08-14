@@ -101,6 +101,7 @@
        
   <p><em>大整数类断断续续写了两天，最后写除法的时候才发现最大的问题是没有明确的输入输出限制意识，导致隐藏bug</em><br>输入：必须为正整数，四则运算、比较运算符仅限于正整数之间<br>输出：减法输出可为负数，其余均应为非负整数。</p>
 <p>完整代码见<a href="https://gitee.com/VealM/UVaOJ/blob/master/Chapter5/textbook/5-2-3.cpp" target="_blank" rel="noopener">Gitee</a>或<a href="https://github.com/VealM/UVaOJ/blob/master/Chapter5/textbook/5-2-3.cpp" target="_blank" rel="noopener">Github</a></p>
+<a id="more"></a>
 <h2 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">bign</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> len, s[maxn];</span><br><span class="line">    <span class="built_in">string</span> sign;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>使用整数数组对大整数进行<strong>逆序逐位</strong>存储(从下标0开始)，len记录长度，sign记录符号位(正数为空，负数为”-“)</p>
