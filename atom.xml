@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://vealm.gitee.io/"/>
-  <updated>2020-08-14T15:12:48.713Z</updated>
+  <updated>2020-08-16T04:51:03.251Z</updated>
   <id>https://vealm.gitee.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>碎语</title>
+    <link href="https://vealm.gitee.io/2020/08/15/mlp/"/>
+    <id>https://vealm.gitee.io/2020/08/15/mlp/</id>
+    <published>2020-08-15T02:01:03.000Z</published>
+    <updated>2020-08-16T04:51:03.251Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;惊觉已经八月中旬了，假期余额不足一个月。&lt;/p&gt;
+&lt;p&gt;细想起来，六月底从兰州回来似乎也没做什么实质意义的事。在我眼里，假期是“网上冲浪、写写代码、读读论文”，在我妈眼里“学车、学车、学车”。平时一向与父母相处融洽欢乐，为了学车这事我有时也在家抱怨，觉得自己做的很不对，因为
+        
+      
+    
+    </summary>
+    
+    
+      <category term="日常" scheme="https://vealm.gitee.io/categories/%E6%97%A5%E5%B8%B8/"/>
+    
+    
+      <category term="随笔" scheme="https://vealm.gitee.io/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
   
   <entry>
     <title>大整数类设计文档</title>
