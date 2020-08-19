@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://vealm.gitee.io/"/>
-  <updated>2020-08-16T04:53:22.150Z</updated>
+  <updated>2020-08-19T04:20:44.104Z</updated>
   <id>https://vealm.gitee.io/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>感知机阅读笔记</title>
+    <link href="https://vealm.gitee.io/2020/08/17/svm0/"/>
+    <id>https://vealm.gitee.io/2020/08/17/svm0/</id>
+    <published>2020-08-17T04:21:32.000Z</published>
+    <updated>2020-08-19T04:20:44.104Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;根据研究生研究方向需要，近期基于李航博士的《统计机器学习》对感知机、SVM的基本概念进行梳理。&lt;br&gt;依如下三步逐层深入理解感知机：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;感知机的定义&lt;/li&gt;
+&lt;li&gt;感知机的学习策略&lt;/li&gt;
+&lt;li&gt;感知机的学习算法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2
+        
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://vealm.gitee.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="感知机" scheme="https://vealm.gitee.io/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/"/>
+    
+  </entry>
   
   <entry>
     <title>碎语</title>

@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>感知机阅读笔记</title>
+    <url>/2020/08/17/svm0/</url>
+    <content><![CDATA[<p>根据研究生研究方向需要，近期基于李航博士的《统计机器学习》对感知机、SVM的基本概念进行梳理。<br>依如下三步逐层深入理解感知机：</p>
+<ul>
+<li>感知机的定义</li>
+<li>感知机的学习策略</li>
+<li>感知机的学习算法</li>
+</ul>
+<h2 id="感知机定义"><a href="#感知机定义" class="headerlink" title="感知机定义"></a>感知机定义</h2><p>假设输入空间（特征空间）是$\mathcal{X} \subseteq \mathcal{R}^N$，输出空间是$\mathcal{Y}={+1，-1}$。输入$x \in \mathcal{X}$表示实例的特征向量，对应于输入空间（特征空间）的点；输出$y \in \mathcal{Y}$表示实例的类别。由输入空间到输出空间的如下函数：</p>
+<p>$$f(x) = sign(w \cdot x + b)$$</p>
+<p>称为感知机。</p>
+<p>sign函数定义</p>
+<p>$$<br>sign(x)=\left{<br>\begin{aligned}<br>+1, \qquad x \geq 0 \<br>-1, \qquad x &lt; 0<br>\end{aligned}<br>\right.<br>$$</p>
+<p><em>假设空间</em><br>定义在特征空间上的所有<strong>线性分类器</strong><br>函数集合${f|f(x) = w \cdot x + b}$</p>
+<p><em>模型参数</em><br>$w \in \mathcal{R}^N$ 权值向量<br>$b \in \mathcal{R}$ 偏置</p>
+<h3 id="直观定义"><a href="#直观定义" class="headerlink" title="直观定义"></a>直观定义</h3><p>线性方程$w \cdot x + b=0$,对应于特征空间$\mathcal{R}^N$中的一个超平面$S$，其中$w$是超平面的法向量，$b$是超平面的截距。这个超平面将特征空间划分为两个部分。位于两部分的点（特征向量）分别被分为正、负两类。</p>
+<div align="center"><img src ="https://i.loli.net/2020/08/17/2Ve7kybsrLdBPh1.png" width=50%></div>
+
+
+<h2 id="感知机的学习策略"><a href="#感知机的学习策略" class="headerlink" title="感知机的学习策略"></a>感知机的学习策略</h2><p><strong>学习策略</strong>是指，<strong>给出确定模型选择的准则</strong>。在介绍学习策略前，我们对于数据集的假设为线性可分的。</p>
+<h3 id="数据集的线性可分性"><a href="#数据集的线性可分性" class="headerlink" title="数据集的线性可分性"></a>数据集的线性可分性</h3><p>给定一个数据集<br>$$T={(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$$<br>其中，$x_i \in \mathcal{R}^N$,$y \in Y={+1,-1}$,$i=1,2…,N,$如果存在某个超平面S<br>$$w\cdot x+b=0$$</p>
+<p>能够将数据集的正实例点和负实例点完全正确地划分到超平面的两侧，即对所有$y_i=+1$的实例$i$有$w\cdot x_i+b&gt;0$，对所有$y_i=-1$的实例，有$w\cdot x_i+b&lt;0$，则称数据集T为线性可分数据集；否则，称数据集T线性不可分。</p>
+<h3 id="感知机学习目标"><a href="#感知机学习目标" class="headerlink" title="感知机学习目标"></a>感知机学习目标</h3><p>求得一个能够将训练集正实例点和负实例点完全正确分开的分离超平面</p>
+<h3 id="经验损失函数"><a href="#经验损失函数" class="headerlink" title="经验损失函数"></a>经验损失函数</h3><p>给定训练数据集<br>$$T={(x_1,y_1),(x_2,y_2)…,(x_N,y_N)}$$<br>其中，x$\in \mathcal{X}$=$\mathcal{R}^N$，y$\in \mathcal{Y}$={+1,-1},$i=1, 2, …,N$。感知机$sign(w \cdot x+b)$学习的损失函数定义为</p>
+<p>$$L(w,b)=- \sum_{x_i \in M} y_i(w \cdot x_i+b)$$</p>
+<p>$x_i \in M$，其中$M$为误分类点的集合。这个损失函数就是感知机学习的经验风险函数。</p>
+<h2 id="感知机的学习策略-1"><a href="#感知机的学习策略-1" class="headerlink" title="感知机的学习策略"></a>感知机的学习策略</h2><p>基于梯度下降法对经验损失函数进行极小化求解</p>
+<h3 id="算法原始形式"><a href="#算法原始形式" class="headerlink" title="算法原始形式"></a>算法原始形式</h3><p><img src="https://i.loli.net/2020/08/19/V6s8ZiMUo4tDQKd.png" alt="mlp2.png"></p>
+<h3 id="算法对偶形式"><a href="#算法对偶形式" class="headerlink" title="算法对偶形式"></a>算法对偶形式</h3><p>根据原始形式，对偶形式将待优化的参数$w$表示为$x_iy_i$的线性和形式，进而优化参数变为$\alpha_i, b$<br><img src="https://i.loli.net/2020/08/19/I5e8yVrKSwMkETL.png" alt="mlp3.png"><br>为了避免多次计算，此处还引入了Gram矩阵$G$<br>$$G=[x_i \cdot x_j]_{N \times N}$$<br>显然Gram矩阵是对称矩阵</p>
+<h2 id="算法适用性评价"><a href="#算法适用性评价" class="headerlink" title="算法适用性评价"></a>算法适用性评价</h2><p>感知机作为线性分类模型，适用于线性可分数据集（该情形下<strong>感知机算法收敛</strong>）的建模，其最优模型<strong>不唯一</strong>，受<strong>初始值、点遍历顺序</strong>的影响。</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>感知机</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>碎语</title>
     <url>/2020/08/15/mlp/</url>
     <content><![CDATA[<p>惊觉已经八月中旬了，假期余额不足一个月。</p>
