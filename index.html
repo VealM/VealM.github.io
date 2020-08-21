@@ -102,6 +102,86 @@
     
     
     <article
+  id="post-kkt"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/21/kkt/"
+    >凸二次规划及其在SVM、SMO算法中的应用</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/21/kkt/" class="article-date">
+  <time datetime="2020-08-21T13:46:34.000Z" itemprop="datePublished">2020-08-21</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>本文仅探讨形式化为凸二次规划的SVM优化算法，特别地介绍启发式解凸二次规划的SMO算法。</p>
+<p>首先介绍SVM（支持向量机）的基本定义。</p>
+<h2 id="SVM-支持向量机"><a href="#SVM-支持向量机" class="headerlink" title="SVM(支持向量机)"></a>SVM(支持向量机)</h2><p>假设输入空间（特征空间）是$\mathcal{X} \subseteq \mathcal{R}^N$，输出空间是$\mathcal{Y}={+1，-1}$。输入$x \in \mathcal{X}$表示实例的特征向量，对应于输入空间（特征空间）的点；输出$y \in \mathcal{Y}$表示实例的类别。给定线性可分/不可分 训练数据集，通过（软）<strong>间隔最大化问题</strong>或<strong>等价地求解相应的</strong>凸二次规划问题**学习得到的分离超平面：</p>
+<p>$$w^{<em>} \cdot x + b^{</em>} = 0$$</p>
+<p>以及相应的分类决策函数<br>$$f(x) = sign(w \cdot x + b)$$</p>
+<p>称为线性支持向量机</p>
+<p>sign函数定义</p>
+<p>$$<br>sign(x)=\left{<br>\begin{aligned}<br>+1, \qquad x \geq 0 \<br>-1, \qquad x &lt; 0<br>\end{aligned}<br>\right.<br>$$</p>
+<h2 id="凸二次规划"><a href="#凸二次规划" class="headerlink" title="凸二次规划"></a>凸二次规划</h2><p>软间隔最大化问题可量化表达为如下凸二次规划问题</p>
+<h3 id="原始问题"><a href="#原始问题" class="headerlink" title="原始问题"></a>原始问题</h3><p>$$\begin{aligned}<br>\min <em>{w, b, \xi} &amp; \frac{1}{2}|w|^{2}+C \sum</em>{i=1}^{N} \xi_{i} \<br>\text { s.t. } &amp; y_{i}\left(w \cdot x_{i}+b\right) \geqslant 1-\xi_{i}, \quad i=1,2, \cdots, N \<br>&amp; \xi_{i} \geqslant 0, \quad i=1,2, \cdots, N<br>\end{aligned}$$</p>
+<p>我们使用拉格朗日乘子法来简化约束条件</p>
+<h3 id="原始问题的拉格朗日函数形式"><a href="#原始问题的拉格朗日函数形式" class="headerlink" title="原始问题的拉格朗日函数形式"></a>原始问题的拉格朗日函数形式</h3><p>原始问题约束变形如下</p>
+<p>$$\begin{aligned}<br>\min <em>{w, b, \xi} &amp; \frac{1}{2}|w|^{2}+C \sum</em>{i=1}^{N} \xi_{i} \<br>\text { s.t. } &amp; -(y_{i}\left(w \cdot x_{i}+b\right) -1 + \xi_i) \leqslant 0, \quad i=1,2, \cdots, N \<br>&amp; -\xi_{i} \leqslant 0, \quad i=1,2, \cdots, N<br>\end{aligned}$$</p>
+<p>进而得到拉格朗日函数形式</p>
+<p>$$L(w, b, \xi, \alpha, \mu) \equiv \frac{1}{2}|w|^{2}+C \sum_{i=1}^{N} \xi_{i}-\sum_{i=1}^{N} \alpha_{i}\left(y_{i}\left(w \cdot x_{i}+b\right)-1+\xi_{i}\right)-\sum_{i=1}^{N} \mu_{i} \xi_{i}$$<br>其中，$\alpha_i \geqslant 0$，$\mu_i \geqslant 0$，$i=1,\cdots, N $</p>
+<p>进而得到优化目标</p>
+<p>$$\begin{aligned}<br>\min <em>{w, b, \xi} \max _{\alpha, \mu}&amp; L(w, b, \xi, \alpha, \mu) \<br> &amp; \alpha_i \geqslant 0, \quad i=1,2, \cdots, N \<br>&amp; \mu</em>{i} \geqslant 0, \quad i=1,2, \cdots, N<br>\end{aligned}$$</p>
+<p>该问题又称为拉格朗日<strong>极小极大问题</strong></p>
+<p>我们记原始问题的最优值为$p^*$</p>
+<p>$$p^* = \min _{w, b, \xi} \max _{\alpha, \mu} L(w, b, \xi, \alpha, \mu) $$</p>
+<h3 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h3><p>拉格朗日对偶问题</p>
+<p>$$\begin{aligned}<br>\max <em>{\alpha, \mu}\min _{w, b, \xi} &amp; L(w, b, \xi, \alpha, \mu) \<br> &amp; \alpha_i \geqslant 0, \quad i=1,2, \cdots, N \<br>&amp; \mu</em>{i} \geqslant 0, \quad i=1,2, \cdots, N<br>\end{aligned}$$</p>
+<p>该问题又称为拉格朗日<strong>极大极小问题</strong></p>
+<p>我们记对偶问题的最优值为$d^<em>$<br>$$d^</em> = \max _ {\alpha, \mu}\min _{w, b, \xi} L(w, b, \xi, \alpha, \mu) $$</p>
+<p>根据运筹学知识，如下结论成立：</p>
+<p>若原始问题和对偶问题都有最优值，则</p>
+<p>$$d^{<em>}=\max _ {\alpha, \mu}\min _{w, b, \xi} L(w, b, \xi, \alpha, \mu) \leqslant  \min _{w, b, \xi} \max _{\alpha, \mu} L(w, b, \xi, \alpha, \mu)=p^{</em>}$$</p>
+<p><em>推论</em></p>
+<p>设$w^<em>, b^</em>, \xi^<em>, \alpha^</em>, \mu ^<em>$分别是原问题和对偶问题的可行解，并且$d^</em> = p ^ <em>$，则$w^</em>, b^<em>, \xi^</em>, \alpha^<em>, \mu ^</em>$分别是原始问题和对偶问题的最优解</p>
+<h3 id="KKT定理"><a href="#KKT定理" class="headerlink" title="KKT定理"></a>KKT定理</h3><h4 id="原始问题-1"><a href="#原始问题-1" class="headerlink" title="原始问题"></a>原始问题</h4><p>假设 $f(x), c_{i}(x), h_{j}(x)$ 是定义在 $\mathbf{R}^{n}$ 上的连续可微函数。考虑约束最优化问题<br>$$<br>\begin{array}{ll}<br>\min <em>{x \in \mathbf{R}^{n}} &amp; f(x) \<br>\text { s.t. } &amp; c</em>{i}(x) \leqslant 0, \quad i=1,2, \cdots, k \<br>&amp; h_{j}(x)=0, \quad j=1,2, \cdots, l<br>\end{array}<br>$$<br>称此约束最优化问题为原始最优化问题或原始问题。</p>
+<p>首先，引进广义拉格朗日函数（generalized Lagrange function）<br>$$<br>L(x, \alpha, \beta)=f(x)+\sum_{i=1}^{k} \alpha_{i} c_{i}(x)+\sum_{j=1}^{l} \beta_{j} h_{j}(x)<br>$$<br>这里， $x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}\right)^{\mathrm{T}} \in \mathbf{R}^{n}, \alpha_{i}, \beta_{j}$ 是拉格朗日乘子， $\alpha_{i} \geqslant 0$ 。考虑 $x$ 的函数:<br>$$<br>\min_x \theta_{P}(x)=\min_x \max <em>{\alpha, \beta: \alpha</em>{i} \geqslant 0} L(x, \alpha, \beta)<br>$$<br>这里，下标 $P$ 表示原始问题。</p>
+<h4 id="对偶问题-1"><a href="#对偶问题-1" class="headerlink" title="对偶问题"></a>对偶问题</h4><p>可以将广义拉格朗日函数的极大极小问题表示为约束最优化问题:<br>$$<br>\begin{array}{c}<br>\max <em>{\alpha, \beta} \theta</em>{D}(\alpha, \beta)=\max <em>{\alpha, \beta} \min _{x} L(x, \alpha, \beta) \<br>\text { s.t. } \quad \alpha</em>{i} \geqslant 0, \quad i=1,2, \cdots, k<br>\end{array}<br>$$<br>称为原始问题的对偶问题。</p>
+<h4 id="最优解的充要条件"><a href="#最优解的充要条件" class="headerlink" title="最优解的充要条件"></a>最优解的充要条件</h4><p>对原始问题和对偶问题，假设$f(x)$和 $c_{i}(x)$ 是凸函数， $h_{j}(x)$ 是仿射函数，并且不等式约束 $c_{i}(x)$ 是严格可行的，则 $x^{<em>}$ 和 $\alpha^{</em>}, \beta^{<em>}$ 分别是原始问题和对偶问题的解的充分必要条件是 $x^{</em>}, \alpha^{<em>}, \beta^{</em>}$ 满足下面Karush-Kuhn-Tucker (KKT) 条件:</p>
+<p>$$<br>\begin{array}{c}<br>\nabla_{x} L\left(x^{<em>}, \alpha^{</em>}, \beta^{<em>}\right)=0 \<br>\alpha_{i}^{</em>} c_{i}\left(x^{<em>}\right)=0, \quad i=1,2, \cdots, k \<br>c_{i}\left(x^{</em>}\right) \leqslant 0, \quad i=1,2, \cdots, k \<br>\alpha_{i}^{<em>} \geqslant 0, \quad i=1,2, \cdots, k \<br>h_{j}\left(x^{</em>}\right)=0 \quad j=1,2, \cdots, l<br>\end{array}<br>$$<br>特别指出，$\alpha_{i}^{<em>} c_{i}\left(x^{</em>}\right)=0$称为 KKT 的对偶互补条件。<br><strong>由此条件可知</strong>: 若 $\alpha_{i}^{<em>}&gt;0,$ 则$c_{i}\left(x^{</em>}\right)=0$</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
   id="post-svm0"
   class="article article-type-post"
   itemscope
@@ -629,63 +709,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hpccluster/" rel="tag">hpccluster</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jupyter/" rel="tag">jupyter</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-www"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/03/12/www/"
-    >访问互联网指南</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2020/03/12/www/" class="article-date">
-  <time datetime="2020-03-12T08:51:39.000Z" itemprop="datePublished">2020-03-12</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>本篇文章提供通过<a href="https://github.com/XX-net/XX-Net" target="_blank" rel="noopener">XX-net</a>访问互联网的方式，尤其适用于Ipv6用户(高校、互联网大厂均分配ipv6)。</p>
-<p>本篇仅提供ipv4-win10-chrome浏览器(最常见)接入XX-net方式以及常见问题的分析。</p> 
-      <a class="article-more-link" href="/2020/03/12/www/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Network/" rel="tag">Network</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/XX-net/" rel="tag">XX-net</a></li></ul>
 
     </footer>
   </div>
