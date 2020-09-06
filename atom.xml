@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://vealm.gitee.io/"/>
-  <updated>2020-08-21T16:15:42.678Z</updated>
+  <updated>2020-09-06T03:00:30.600Z</updated>
   <id>https://vealm.gitee.io/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>kkt</title>
+    <link href="https://vealm.gitee.io/2020/09/06/kkt/"/>
+    <id>https://vealm.gitee.io/2020/09/06/kkt/</id>
+    <published>2020-09-06T02:59:34.458Z</published>
+    <updated>2020-09-06T03:00:30.600Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;KKT&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;本文的行文思路为：首先，介绍一般化的KKT定理；为了介绍KKT定理在SVM中问题的应用，简要给出SVM定义，并给出间隔最大化对应的凸二次规划问题——原问题与对偶问题的形式；为求解该凸二次规划问题，从对偶问题入手，求解得到最优解&lt;img
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>凸二次规划及其在SVM、SMO算法中的应用</title>
-    <link href="https://vealm.gitee.io/2020/08/21/kkt/"/>
-    <id>https://vealm.gitee.io/2020/08/21/kkt/</id>
+    <link href="https://vealm.gitee.io/2020/08/21/kkt2/"/>
+    <id>https://vealm.gitee.io/2020/08/21/kkt2/</id>
     <published>2020-08-21T13:46:34.000Z</published>
-    <updated>2020-08-21T16:15:42.678Z</updated>
+    <updated>2020-09-06T03:00:14.431Z</updated>
     
     <summary type="html">
     
