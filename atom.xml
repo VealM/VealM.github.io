@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://vealm.gitee.io/"/>
-  <updated>2020-09-06T03:00:30.600Z</updated>
+  <updated>2020-09-06T03:10:30.301Z</updated>
   <id>https://vealm.gitee.io/</id>
   
   <author>
@@ -17,86 +17,19 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>kkt</title>
-    <link href="https://vealm.gitee.io/2020/09/06/kkt/"/>
-    <id>https://vealm.gitee.io/2020/09/06/kkt/</id>
-    <published>2020-09-06T02:59:34.458Z</published>
-    <updated>2020-09-06T03:00:30.600Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1&gt;KKT&lt;/h1&gt;
-&lt;hr&gt;
-&lt;p&gt;本文的行文思路为：首先，介绍一般化的KKT定理；为了介绍KKT定理在SVM中问题的应用，简要给出SVM定义，并给出间隔最大化对应的凸二次规划问题——原问题与对偶问题的形式；为求解该凸二次规划问题，从对偶问题入手，求解得到最优解&lt;img
-        
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>凸二次规划及其在SVM、SMO算法中的应用</title>
-    <link href="https://vealm.gitee.io/2020/08/21/kkt2/"/>
-    <id>https://vealm.gitee.io/2020/08/21/kkt2/</id>
+    <link href="https://vealm.gitee.io/2020/08/21/kkt/"/>
+    <id>https://vealm.gitee.io/2020/08/21/kkt/</id>
     <published>2020-08-21T13:46:34.000Z</published>
-    <updated>2020-09-06T03:00:14.431Z</updated>
+    <updated>2020-09-06T03:10:30.301Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;本文仅探讨形式化为凸二次规划的SVM优化算法，特别地介绍启发式解凸二次规划的SMO算法。&lt;/p&gt;
-&lt;p&gt;首先介绍SVM（支持向量机）的基本定义。&lt;/p&gt;
-&lt;h2 id=&quot;svm-支持向量机&quot;&gt;SVM(支持向量机)&lt;/h2&gt;
-&lt;p&gt;假设输入空间（特征空间）是&lt;span
-        
-      
+      &lt;p&gt;本文的行文思路为：首先，介绍一般化的KKT定理；为了介绍KKT定理在SVM中问题的应用，简要给出SVM定义，并给出间隔最大化对应的凸二次规划问题——原问题与对偶问题的形式；为求解该凸二次规划问题，从对偶问题入手，求解得到最优解&lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msup&gt;&lt;mi&gt;α&lt;/mi&gt;&lt;mo&gt;∗&lt;/mo&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;annotation encoding=&quot;application/x-tex&quot;&gt;\alpha^*&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.688696em;vertical-align:0em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord&quot;&gt;&lt;span class=&quot;mord mathdefault&quot; style=&quot;margin-right:0.0037em;&quot;&gt;α&lt;/span&gt;&lt;span class=&quot;msupsub&quot;&gt;&lt;span class=&quot;vlist-t&quot;&gt;&lt;span class=&quot;vlist-r&quot;&gt;&lt;span class=&quot;vlist&quot; style=&quot;height:0.688696em;&quot;&gt;&lt;span style=&quot;top:-3.063em;margin-right:0.05em;&quot;&gt;&lt;span class=&quot;pstrut&quot; style=&quot;height:2.7em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;sizing reset-size6 size3 mtight&quot;&gt;&lt;span class=&quot;mbin mtight&quot;&gt;∗&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;，将KKT定理应用于该凸二次规划问题的拉格朗日函数，最后得到最优解&lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msup&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mo&gt;∗&lt;/mo&gt;&lt;/msup&gt;&lt;mo separator=&quot;true&quot;&gt;,&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;b&lt;/mi&gt;&lt;mo&gt;∗&lt;/mo&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;annotation encoding=&quot;application/x-tex&quot;&gt;w^*, b^*&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.8888799999999999em;vertical-align:-0.19444em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord&quot;&gt;&lt;span class=&quot;mord mathdefault&quot; style=&quot;margin-right:0.02691em;&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;msupsub&quot;&gt;&lt;span class=&quot;vlist-t&quot;&gt;&lt;span class=&quot;vlist-r&quot;&gt;&lt;span class=&quot;vlist&quot; style=&quot;height:0.688696em;&quot;&gt;&lt;span style=&quot;top:-3.063em;margin-right:0.05em;&quot;&gt;&lt;span class=&quot;pstrut&quot; style=&quot;height:2.7em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;sizing reset-size6 size3 mtight&quot;&gt;&lt;span class=&quot;mbin mtight&quot;&gt;∗&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;mpunct&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mspace&quot; style=&quot;margin-right:0.16666666666666666em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord&quot;&gt;&lt;span class=&quot;mord mathdefault&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;msupsub&quot;&gt;&lt;span class=&quot;vlist-t&quot;&gt;&lt;span class=&quot;vlist-r&quot;&gt;&lt;span class=&quot;vlist&quot; style=&quot;height:0.688696em;&quot;&gt;&lt;span style=&quot;top:-3.063em;margin-right:0.05em;&quot;&gt;&lt;span class=&quot;pstrut&quot; style=&quot;height:2.7em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;sizing reset-size6 size3 mtight&quot;&gt;&lt;span class=&quot;mbin mtight&quot;&gt;∗&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;应满足的充要条件。&lt;/p&gt;
     
     </summary>
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>感知机阅读笔记</title>
-    <link href="https://vealm.gitee.io/2020/08/17/svm0/"/>
-    <id>https://vealm.gitee.io/2020/08/17/svm0/</id>
-    <published>2020-08-17T04:21:32.000Z</published>
-    <updated>2020-08-19T04:20:44.104Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;根据研究生研究方向需要，近期基于李航博士的《统计机器学习》对感知机、SVM的基本概念进行梳理。&lt;br&gt;依如下三步逐层深入理解感知机：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;感知机的定义&lt;/li&gt;
-&lt;li&gt;感知机的学习策略&lt;/li&gt;
-&lt;li&gt;感知机的学习算法&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://vealm.gitee.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="感知机" scheme="https://vealm.gitee.io/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/"/>
     
   </entry>
   
