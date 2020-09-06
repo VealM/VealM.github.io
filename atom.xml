@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://vealm.gitee.io/"/>
-  <updated>2020-08-21T15:19:59.209Z</updated>
+  <updated>2020-08-21T16:15:42.678Z</updated>
   <id>https://vealm.gitee.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://vealm.gitee.io/2020/08/21/kkt/"/>
     <id>https://vealm.gitee.io/2020/08/21/kkt/</id>
     <published>2020-08-21T13:46:34.000Z</published>
-    <updated>2020-08-21T15:19:59.209Z</updated>
+    <updated>2020-08-21T16:15:42.678Z</updated>
     
     <summary type="html">
     
@@ -31,7 +31,8 @@
         
           &lt;p&gt;本文仅探讨形式化为凸二次规划的SVM优化算法，特别地介绍启发式解凸二次规划的SMO算法。&lt;/p&gt;
 &lt;p&gt;首先介绍SVM（支持向量机）的基本定义。&lt;/p&gt;
-&lt;h2 id=&quot;SVM-支持向量机&quot;&gt;&lt;a href=&quot;#SVM-支持向量机&quot; class=&quot;headerlink&quot;
+&lt;h2 id=&quot;svm-支持向量机&quot;&gt;SVM(支持向量机)&lt;/h2&gt;
+&lt;p&gt;假设输入空间（特征空间）是&lt;span
         
       
     
